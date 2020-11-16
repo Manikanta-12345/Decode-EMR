@@ -4,6 +4,7 @@ public class DiabetesMastersDTO {
 	private int id;
 	private String name;
 
+//  setters and getters
 	public int getId() {
 		return id;
 	}
