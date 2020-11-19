@@ -1,13 +1,33 @@
 package com.decode.model;
 
-public class Address {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "patient_address")
+public class Address {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(name = "address_line1")
 	private String addressLine1;
+	@Column(name = "address_line2")
 	private String addressLine2;
+	@Column(name = "land_mark")
 	private String landMark;
+	@Column(name = "pin_code")
 	private String pinCode;
+	@Column(name = "location")
 	private String location;
+	@OneToOne
+	@JoinColumn(name="patient_id")
 	private Patient patient;
 
 	public int getId() {
@@ -56,14 +76,6 @@ public class Address {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
 	}
 
 }

@@ -2,14 +2,36 @@ package com.decode.model;
 
 import java.util.Date;
 
-public class Episode {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "decode_episode")
+public class Episode {
+	@Id
+	@Column(name = "episode_id")
 	private String episodeId;
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
 	private Patient patient;
-	private String createduser;
+	@Column(name = "created_user")
+	private String createdUser;
+	@Column(name = "last_updated_user")
 	private String lastUpdatedUser;
+	@Column(name = "created_date")
 	private Date createdDate;
+	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="episode")
+	private DiseaseHistory diseaseHistory;
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="episode")
+	private DiseaseSeverityAndControlStatus diseaseSeverity;
 
 	public String getEpisodeId() {
 		return episodeId;
@@ -27,12 +49,12 @@ public class Episode {
 		this.patient = patient;
 	}
 
-	public String getCreateduser() {
-		return createduser;
+	public String getCreatedUser() {
+		return createdUser;
 	}
 
-	public void setCreateduser(String createduser) {
-		this.createduser = createduser;
+	public void setCreatedUser(String createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	public String getLastUpdatedUser() {
@@ -57,6 +79,22 @@ public class Episode {
 
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	public DiseaseHistory getDiseaseHistory() {
+		return diseaseHistory;
+	}
+
+	public void setDiseaseHistory(DiseaseHistory diseaseHistory) {
+		this.diseaseHistory = diseaseHistory;
+	}
+
+	public DiseaseSeverityAndControlStatus getDiseaseSeverity() {
+		return diseaseSeverity;
+	}
+
+	public void setDiseaseSeverity(DiseaseSeverityAndControlStatus diseaseSeverity) {
+		this.diseaseSeverity = diseaseSeverity;
 	}
 
 }
