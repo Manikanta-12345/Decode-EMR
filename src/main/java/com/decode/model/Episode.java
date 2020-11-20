@@ -28,10 +28,28 @@ public class Episode {
 	private Date createdDate;
 	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="episode")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
 	private DiseaseHistory diseaseHistory;
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="episode")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
 	private DiseaseSeverityAndControlStatus diseaseSeverity;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private EyeHealth eyeHealth;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private KidneyHealth kidneyHealth;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private HeartHealth heartHealth;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private FamilyHistory familyHistory;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private FeetHealth feetHealth;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	private NextAppointments nextAppointments;
 
 	public String getEpisodeId() {
 		return episodeId;
