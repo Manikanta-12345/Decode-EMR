@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,9 +33,17 @@ public class Patient {
 	private int months;
 	private int days;
 	private String gender;
+	private String title;
+	@Column(name = "country_id")
+	private int countryId;
+	@Column(name = "state_id")
+	private int stateId;
+	@Column(name = "district_id")
+	private int districtId;
+	private String email;
 	@Column(name = "mobile")
 	private String mobile;
-	@Column(name = "nextKin")
+	@Column(name = "next_kin")
 	private String nextKin;
 	@Column(name = "created_user")
 	private String createduser;
@@ -44,10 +53,10 @@ public class Patient {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(mappedBy="patient")
-	@Cascade(value=org.hibernate.annotations.CascadeType.ALL)
+	@OneToOne(mappedBy="patient",cascade = CascadeType.ALL)
 	private Address patientAddress;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "patient_id")
 	private Set<Episode> episodes;
 
 	public String getPatientId() {
@@ -130,8 +139,48 @@ public class Patient {
 		return years;
 	}
 
+	public int getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(int countryId) {
+		this.countryId = countryId;
+	}
+
+	public int getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
+	}
+
+	public int getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(int districtId) {
+		this.districtId = districtId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public void setYears(int years) {
 		this.years = years;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getGender() {
@@ -185,5 +234,17 @@ public class Patient {
 	public void setPatientAddress(Address patientAddress) {
 		this.patientAddress = patientAddress;
 	}
+
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", years=" + years + ", months=" + months
+				+ ", days=" + days + ", gender=" + gender + ", title=" + title + ", countryId=" + countryId
+				+ ", stateId=" + stateId + ", districtId=" + districtId + ", email=" + email + ", mobile=" + mobile
+				+ ", nextKin=" + nextKin + ", patientAddress=" + patientAddress + ", episodes=" + episodes + "]";
+	}
+
+	
+	
 
 }

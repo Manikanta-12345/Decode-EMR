@@ -41,9 +41,9 @@ public class KidneyHealth {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "episode_id")
-	private Episode episode;
+    private Episode episode;
 	
 	
 	public int getId() {
@@ -124,5 +124,13 @@ public class KidneyHealth {
 	public void setSerumCreatinine(String serumCreatinine) {
 		this.serumCreatinine = serumCreatinine;
 	}
+	@Override
+	public String toString() {
+		return "KidneyHealth [id=" + id + ", suggestedInterventionForKidney=" + suggestedInterventionForKidney
+				+ ", suggestedKidneyMonitoring=" + suggestedKidneyMonitoring + ", sugar=" + sugar + ", protien="
+				+ protien + ", microAlbumin=" + microAlbumin + ", bloodUrea=" + bloodUrea + ", serumCreatinine="
+				+ serumCreatinine + "]";
+	}
+	
 	
 }

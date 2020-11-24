@@ -23,6 +23,10 @@ public class EyeHealth {
 	private String suggestedInterventionForEye;
 	@Column(name="suggested_eye_dialated_examination")
 	private String suggestedDilatedEyeExamination;
+	@Column(name="left_eye_notes")
+	private String leftEyeNotes;
+	@Column(name="right_eye_notes")
+	private String rightEyeNotes;
 	@Column(name = "created_user")
 	private String createduser;
 	@Column(name = "created_date")
@@ -31,21 +35,16 @@ public class EyeHealth {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "episode_id")
-	private Episode episode;
+    private Episode episode;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Episode getEpisode() {
-		return episode;
-	}
-	public void setEpisode(Episode episode) {
-		this.episode = episode;
-	}
+	
 	public String getCreateduser() {
 		return createduser;
 	}
@@ -82,4 +81,30 @@ public class EyeHealth {
 	public void setSuggestedDilatedEyeExamination(String suggestedDilatedEyeExamination) {
 		this.suggestedDilatedEyeExamination = suggestedDilatedEyeExamination;
 	}
+	public String getLeftEyeNotes() {
+		return leftEyeNotes;
+	}
+	public void setLeftEyeNotes(String leftEyeNotes) {
+		this.leftEyeNotes = leftEyeNotes;
+	}
+	public String getRightEyeNotes() {
+		return rightEyeNotes;
+	}
+	public void setRightEyeNotes(String rightEyeNotes) {
+		this.rightEyeNotes = rightEyeNotes;
+	}
+	@Override
+	public String toString() {
+		return "EyeHealth [id=" + id + ", suggestedInterventionForEye=" + suggestedInterventionForEye
+				+ ", suggestedDilatedEyeExamination=" + suggestedDilatedEyeExamination + ", leftEyeNotes="
+				+ leftEyeNotes + ", rightEyeNotes=" + rightEyeNotes + "]";
+	}
+	public Episode getEpisode() {
+		return episode;
+	}
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
+	}
+	
+	
 }

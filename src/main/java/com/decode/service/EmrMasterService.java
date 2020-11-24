@@ -14,6 +14,7 @@ import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
 import com.decode.masters.dto.SuggestedHeartInterventionDTO;
 import com.decode.masters.dto.SuggestedKidneyInterventionDTO;
+import com.decode.model.Patient;
 
 public interface EmrMasterService {
 
@@ -40,4 +41,6 @@ public interface EmrMasterService {
 	public List<SuggestedHeartInterventionDTO> getSuggestedHeartIntervention();
 
 	public List<SuggestedKidneyInterventionDTO> getSuggestedKidneyIntervention();
+	public String savePatient(Patient patient);
+	
 }

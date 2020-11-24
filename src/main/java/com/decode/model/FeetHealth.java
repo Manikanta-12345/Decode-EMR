@@ -46,11 +46,17 @@ public class FeetHealth {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "episode_id")
-	private Episode episode;
+    private Episode episode;
 	public int getId() {
 		return id;
+	}
+	public Episode getEpisode() {
+		return episode;
+	}
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -139,10 +145,16 @@ public class FeetHealth {
 	public void setLastUpdatedUser(String lastUpdatedUser) {
 		this.lastUpdatedUser = lastUpdatedUser;
 	}
-	public Episode getEpisode() {
-		return episode;
+	
+	@Override
+	public String toString() {
+		return "FeetHealth [id=" + id + ", rightFeetCondition=" + rightFeetCondition + ", leftFeetCondition="
+				+ leftFeetCondition + ", rightFeetObservation=" + rightFeetObservation + ", leftFeetObservation="
+				+ leftFeetObservation + ", rightFeetUlceration=" + rightFeetUlceration + ", leftFeetUlceration="
+				+ leftFeetUlceration + ", rightFeetVibration=" + rightFeetVibration + ", leftFeetVibration="
+				+ leftFeetVibration + ", rightFeetCounter=" + rightFeetCounter + ", leftFeetCounter=" + leftFeetCounter
+				+ "]";
 	}
-	public void setEpisode(Episode episode) {
-		this.episode = episode;
-	}
+	
+	
 }

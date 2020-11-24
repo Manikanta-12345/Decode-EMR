@@ -18,6 +18,7 @@ import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
 import com.decode.masters.dto.SuggestedHeartInterventionDTO;
 import com.decode.masters.dto.SuggestedKidneyInterventionDTO;
+import com.decode.model.Patient;
 import com.decode.repository.CombrobiditiesMastersRepository;
 import com.decode.repository.DiabeticTypesRepository;
 import com.decode.repository.DiabetisMastersRepository;
@@ -26,6 +27,7 @@ import com.decode.repository.FeetObservationMastersRepository;
 import com.decode.repository.HabitualPatternMastersRepository;
 import com.decode.repository.LifeStyleMedicationRespository;
 import com.decode.repository.MedicationMastersRepository;
+import com.decode.repository.PatientRepository;
 import com.decode.repository.SuggestedDilatedEyeExaminationRepository;
 import com.decode.repository.SuggestedEyeInterventionRepository;
 import com.decode.repository.SuggestedHeartInterventionRepository;
@@ -59,6 +61,8 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	private SuggestedHeartInterventionRepository suggestedHeartInterventionRepository;
 	@Autowired
 	private SuggestedKidneyInterventionRepository suggestedKidneyInterventionRepository;
+	@Autowired
+	private PatientRepository patientRepository;
 
 	@Override
 	public List<DiabetesMastersDTO> getDiabetesMasters() {
@@ -202,5 +206,10 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 			suggestedKidneyInterventionList.add(suggestedKidneyIntervention);
 		});
 		return suggestedKidneyInterventionList;
+	}
+	@Override
+	public String savePatient(Patient patient) {
+		Patient patientFromDB = patientRepository.save(patient);
+		return patientFromDB.getPatientId();
 	}
 }

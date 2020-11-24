@@ -17,7 +17,7 @@ public class Episode {
 	@Id
 	@Column(name = "episode_id")
 	private String episodeId;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
 	@Column(name = "created_user")
@@ -28,27 +28,21 @@ public class Episode {
 	private Date createdDate;
 	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private DiseaseHistory diseaseHistory;
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private DiseaseSeverityAndControlStatus diseaseSeverity;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private EyeHealth eyeHealth;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private KidneyHealth kidneyHealth;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private HeartHealth heartHealth;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private FamilyHistory familyHistory;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private FeetHealth feetHealth;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "episode")
+	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private NextAppointments nextAppointments;
 
 	public String getEpisodeId() {
@@ -114,5 +108,63 @@ public class Episode {
 	public void setDiseaseSeverity(DiseaseSeverityAndControlStatus diseaseSeverity) {
 		this.diseaseSeverity = diseaseSeverity;
 	}
+
+	public EyeHealth getEyeHealth() {
+		return eyeHealth;
+	}
+
+	public void setEyeHealth(EyeHealth eyeHealth) {
+		this.eyeHealth = eyeHealth;
+	}
+
+	public KidneyHealth getKidneyHealth() {
+		return kidneyHealth;
+	}
+
+	public void setKidneyHealth(KidneyHealth kidneyHealth) {
+		this.kidneyHealth = kidneyHealth;
+	}
+
+	public HeartHealth getHeartHealth() {
+		return heartHealth;
+	}
+
+	public void setHeartHealth(HeartHealth heartHealth) {
+		this.heartHealth = heartHealth;
+	}
+
+	public FamilyHistory getFamilyHistory() {
+		return familyHistory;
+	}
+
+	public void setFamilyHistory(FamilyHistory familyHistory) {
+		this.familyHistory = familyHistory;
+	}
+
+	public FeetHealth getFeetHealth() {
+		return feetHealth;
+	}
+
+	public void setFeetHealth(FeetHealth feetHealth) {
+		this.feetHealth = feetHealth;
+	}
+
+	public NextAppointments getNextAppointments() {
+		return nextAppointments;
+	}
+
+	public void setNextAppointments(NextAppointments nextAppointments) {
+		this.nextAppointments = nextAppointments;
+	}
+
+	@Override
+	public String toString() {
+		return "Episode [episodeId=" + episodeId + ", diseaseHistory=" + diseaseHistory + ", diseaseSeverity="
+				+ diseaseSeverity + ", eyeHealth=" + eyeHealth + ", kidneyHealth=" + kidneyHealth + ", heartHealth="
+				+ heartHealth + ", familyHistory=" + familyHistory + ", feetHealth=" + feetHealth
+				+ ", nextAppointments=" + nextAppointments + "]";
+	}
+
+	
 
 }

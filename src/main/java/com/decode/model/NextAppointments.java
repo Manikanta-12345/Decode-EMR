@@ -35,17 +35,27 @@ public class NextAppointments {
 	private Date retinalExaminastion;
 	@Column(name = "created_user")
 	private String createduser;
+	
+	public Episode getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
+	}
+
+
+
 	@Column(name = "created_date")
 	private Date createdDate;
 	@Column(name = "last_update_date")
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne
 	@JoinColumn(name = "episode_id")
-	private Episode episode;
-	
-	
+    private Episode episode;
 	public int getId() {
 		return id;
 	}
@@ -142,12 +152,16 @@ public class NextAppointments {
 		this.lastUpdatedUser = lastUpdatedUser;
 	}
 
-	public Episode getEpisode() {
-		return episode;
+	
+
+	@Override
+	public String toString() {
+		return "NextAppointments [id=" + id + ", bloodPressureDate=" + bloodPressureDate + ", hbA1cMonitoring="
+				+ hbA1cMonitoring + ", neuropathyScreening=" + neuropathyScreening + ", cholestrolMonitoring="
+				+ cholestrolMonitoring + ", kidneyFunctions=" + kidneyFunctions + ", plasmaMonitoring="
+				+ plasmaMonitoring + ", retinalExaminastion=" + retinalExaminastion + "]";
 	}
 
-	public void setEpisode(Episode episode) {
-		this.episode = episode;
-	}
+	
 
 }

@@ -39,9 +39,9 @@ public class FamilyHistory {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "episode_id")
-	private Episode episode;
+    private Episode episode;
 	
 	
 	public int getId() {
@@ -74,12 +74,7 @@ public class FamilyHistory {
 	public void setLastUpdatedUser(String lastUpdatedUser) {
 		this.lastUpdatedUser = lastUpdatedUser;
 	}
-	public Episode getEpisode() {
-		return episode;
-	}
-	public void setEpisode(Episode episode) {
-		this.episode = episode;
-	}
+	
 	public String getRelation() {
 		return relation;
 	}
@@ -116,4 +111,18 @@ public class FamilyHistory {
 	public void setSleep(String sleep) {
 		this.sleep = sleep;
 	}
+	@Override
+	public String toString() {
+		return "FamilyHistory [id=" + id + ", relation=" + relation + ", alcoholConsumption=" + alcoholConsumption
+				+ ", habitualPattern=" + habitualPattern + ", historyOfSmoking=" + historyOfSmoking
+				+ ", emotionalStress=" + emotionalStress + ", sleep=" + sleep + "]";
+	}
+	public Episode getEpisode() {
+		return episode;
+	}
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
+	}
+	
+
 }

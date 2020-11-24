@@ -33,7 +33,7 @@ public class DiseaseHistory {
 	private String typeOfOralMedication;
     @Column(name="comorbidities")
 	private String comorBidities;
-    @OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "episode_id")
     private Episode episode;
     @Column(name = "created_user")
@@ -46,6 +46,12 @@ public class DiseaseHistory {
 	private String lastUpdatedUser;
 	public int getId() {
 		return id;
+	}
+	public Episode getEpisode() {
+		return episode;
+	}
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -117,6 +123,13 @@ public class DiseaseHistory {
 	public void setLastUpdatedUser(String lastUpdatedUser) {
 		this.lastUpdatedUser = lastUpdatedUser;
 	}
+	@Override
+	public String toString() {
+		return "DiseaseHistory [id=" + id + ", diseaseName=" + diseaseName + ", diseaseType=" + diseaseType
+				+ ", duration=" + duration + ", lsm=" + lsm + ", medication=" + medication + ", typeOfOralMedication="
+				+ typeOfOralMedication + ", comorBidities=" + comorBidities + "]";
+	}
+	
 	
 	
 }

@@ -30,7 +30,7 @@ public class BirtRunnableCacheService {
 		IReportRunnable runnable = null;
 		runnableCache = new HashMap<String, IReportRunnable>();
 		try {
-			runnable = birtEngineFactory.openReportDesign("D:/dream_project/Decode-EMR/decode_status_report.rptdesign");
+			runnable = birtEngineFactory.openReportDesign("F:\\git-repo\\Decode-EMR\\decode_status_report.rptdesign");
 			runnableCache.put("decode_report", runnable);
 			logger.info("cache loading completed...." + runnableCache.size());
 		} catch (EngineException e) {
@@ -43,7 +43,7 @@ public class BirtRunnableCacheService {
 		IReportRunnable runnable = null;
 		runnableCache = new HashMap<String, IReportRunnable>();
 		try {
-			runnable = birtEngineFactory.openReportDesign("D:/dream_project/Decode-EMR/decode_status_report.rptdesign");
+			runnable = birtEngineFactory.openReportDesign("F:\\git-repo\\Decode-EMR\\decode_status_report.rptdesign");
 			runnableCache.put("decode_report", runnable);
 			logger.info("cache loading completed...." + runnableCache.size());
 		} catch (EngineException e) {
