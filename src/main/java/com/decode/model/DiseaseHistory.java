@@ -2,7 +2,6 @@ package com.decode.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="disease_history")
@@ -32,6 +33,7 @@ public class DiseaseHistory {
     @Column(name="type_of_oral_medication")
 	private String typeOfOralMedication;
     @Column(name="comorbidities")
+    
 	private String comorBidities;
 	@OneToOne
 	@JoinColumn(name = "episode_id")

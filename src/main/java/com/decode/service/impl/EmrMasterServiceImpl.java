@@ -1,7 +1,9 @@
 package com.decode.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import com.decode.masters.dto.CombrobiditiesMastersDTO;
 import com.decode.masters.dto.DiabetecTypesDTO;
 import com.decode.masters.dto.DiabetesMastersDTO;
 import com.decode.masters.dto.DiseaseInterventionMastersDTO;
+import com.decode.masters.dto.EmrResponse;
 import com.decode.masters.dto.FeetObservationMastersDTO;
 import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
@@ -32,7 +35,9 @@ import com.decode.repository.SuggestedDilatedEyeExaminationRepository;
 import com.decode.repository.SuggestedEyeInterventionRepository;
 import com.decode.repository.SuggestedHeartInterventionRepository;
 import com.decode.repository.SuggestedKidneyInterventionRepository;
+import com.decode.service.DecodeBirtService;
 import com.decode.service.EmrMasterService;
+import com.decode.utils.BirtReportConstants;
 
 @Service
 public class EmrMasterServiceImpl implements EmrMasterService {
@@ -63,6 +68,8 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	private SuggestedKidneyInterventionRepository suggestedKidneyInterventionRepository;
 	@Autowired
 	private PatientRepository patientRepository;
+	@Autowired
+	private DecodeBirtService decodeBirtService;
 
 	@Override
 	public List<DiabetesMastersDTO> getDiabetesMasters() {
@@ -207,9 +214,19 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 		});
 		return suggestedKidneyInterventionList;
 	}
+
 	@Override
-	public String savePatient(Patient patient) {
+	public EmrResponse savePatient(Patient patient) {
 		Patient patientFromDB = patientRepository.save(patient);
-		return patientFromDB.getPatientId();
+		Map<Object, Object> reportParams = new HashMap<>();
+		reportParams.put("patientId", patientFromDB.getPatientId());
+		reportParams.put("episodeId", patientFromDB.getEpisodes().stream().findFirst().get().getEpisodeId());
+		byte[] report = decodeBirtService.generateReport(reportParams, BirtReportConstants.PDF_FORMAT);
+		EmrResponse response = new EmrResponse();
+		response.setReport(report);
+		response.setMessage("Patient Created Successfully");
+		response.setStatusCode("Success");
+		System.out.println("before return "+response.getReport());
+		return response;
 	}
 }

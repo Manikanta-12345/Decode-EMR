@@ -3,16 +3,24 @@ package com.decode.masters.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class FeetHealthDto {
 	private int id;
 	private String rightFeetCondition;
 	private String leftFeetCondition;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String> rightFeetObservation;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  leftFeetObservation;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  rightFeetUlceration;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  leftFeetUlceration;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  rightFeetVibration;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  leftFeetVibration;
 	private String rightFeetCounter;
 	private String leftFeetCounter;

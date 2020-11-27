@@ -22,22 +22,22 @@ public class DecodeBirtServiceImpl implements DecodeBirtService {
 
 	@Autowired
 	private BirtRunnableCacheService birtRunnableCacheService;
-	
-	
+
 	@Autowired
 	private IReportEngine birtEngine;
 
 	@Override
-	public void generateReport(Map<Object, Object> reportParams, String reportFormat) {
+	public byte[] generateReport(Map<Object, Object> reportParams, String reportFormat) {
 		IReportRunnable runnable = birtRunnableCacheService.getRunnableCache().get("decode_report");
+		byte[] report = null;
 		if (reportFormat.equalsIgnoreCase(BirtReportConstants.PDF_FORMAT)) {
 			try {
-				generatePdf(BirtReportConstants.PDF_FORMAT, runnable, reportParams);
+				report = generatePdf(BirtReportConstants.PDF_FORMAT, runnable, reportParams);
 			} catch (EngineException e) {
 				e.printStackTrace();
 			}
 		}
-
+		return report;
 	}
 
 	public byte[] generatePdf(String pdfFormat, IReportRunnable runnable, Map<Object, Object> reportParams)
@@ -46,20 +46,24 @@ public class DecodeBirtServiceImpl implements DecodeBirtService {
 		IRunAndRenderTask task = birtEngine.createRunAndRenderTask(runnable);
 		ByteArrayOutputStream out = null;
 		RenderOption renderOption = null;
+		byte[] reponse=null;
 		out = new ByteArrayOutputStream();
 		renderOption = new PDFRenderOption();
 		renderOption.setOutputFormat(pdfFormat);
 		renderOption.setOutputStream(out);
-		renderOption.setOutputFileName("D:/dream_project/Decode-EMR/decode.pdf");
+		//renderOption.setOutputFileName("F:\\git-repo\\Decode-EMR\\decode_status_report.pdf");
 		task.setRenderOption(renderOption);
 		task.setParameterValues(reportParams);
+	
+		System.out.println("response in birt "+reponse);
 		task.run();
 		task.close();
 		try {
+			reponse=out.toByteArray();
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return reponse;
 	}
 }

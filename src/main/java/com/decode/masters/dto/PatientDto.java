@@ -183,15 +183,7 @@ public class PatientDto {
 		this.episodes = episodes;
 	}
 
-	@Override
-	public String toString() {
-		return "PatientDto [patientId=" + patientId + ", firstName=" + firstName + ", middleName=" + middleName
-				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", years=" + years + ", months=" + months
-				+ ", days=" + days + ", gender=" + gender + ", title=" + title + ", countryId=" + countryId
-				+ ", stateId=" + stateId + ", districtId=" + districtId + ", email=" + email + ", mobile=" + mobile
-				+ ", nextKin=" + nextKin + ", createduser=" + createduser + ", patientAddress=" + patientAddress
-				+ ", episodes=" + episodes + "]";
-	}
+	
 
 	
 	

@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "decode_episode")
 public class Episode {
@@ -29,6 +31,7 @@ public class Episode {
 	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
 	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private DiseaseHistory diseaseHistory;
 	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
 	private DiseaseSeverityAndControlStatus diseaseSeverity;

@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -53,9 +54,9 @@ public class Patient {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
-	@OneToOne(mappedBy="patient",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private Address patientAddress;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id")
 	private Set<Episode> episodes;
 

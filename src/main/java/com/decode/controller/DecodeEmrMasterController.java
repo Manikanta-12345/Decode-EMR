@@ -1,12 +1,15 @@
 package com.decode.controller;
 
+import java.util.Base64;
 import java.util.List;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.convention.NamingConventions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import com.decode.masters.dto.DiabetecTypesDTO;
 import com.decode.masters.dto.DiabetesMastersDTO;
 import com.decode.masters.dto.DiseaseInterventionMastersDTO;
 import com.decode.masters.dto.DistrictDto;
+import com.decode.masters.dto.EmrResponse;
 import com.decode.masters.dto.FeetObservationMastersDTO;
 import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
@@ -32,6 +36,7 @@ import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
 import com.decode.masters.dto.SuggestedHeartInterventionDTO;
 import com.decode.masters.dto.SuggestedKidneyInterventionDTO;
+import com.decode.model.Episode;
 import com.decode.model.Patient;
 import com.decode.repository.CountriesRepository;
 import com.decode.repository.DistrictRepository;
@@ -152,31 +157,98 @@ public class DecodeEmrMasterController {
 	}
 
 	@RequestMapping(value = "/saveemr", method = RequestMethod.POST)
-	public ResponseEntity<String> saveeEmr(@RequestBody PatientDto patientDTO) {
-		System.out.println("patient " + patientDTO);
+	public ResponseEntity<byte[]> saveeEmr(@RequestBody PatientDto patientDTO) {
+
 		patientDTO.getEpisodes().parallelStream().forEach(epi -> {
 			System.out.println("episode " + epi);
 		});
 		ModelMapper mapper = new ModelMapper();
 
 		mapper.getConfiguration().setFieldMatchingEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT)
-				.setFieldAccessLevel(AccessLevel.PRIVATE).setSkipNullEnabled(true).setAmbiguityIgnored(true)
-				.setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
+				.setFieldAccessLevel(AccessLevel.PRIVATE).setPropertyCondition(Conditions.isNotNull())
+				.setAmbiguityIgnored(true).setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
 		Patient patient = mapper.map(patientDTO, Patient.class);
+		System.out.println("patient " + patient);
+		setPatientProperties(patient);
+		try {
+			EmrResponse response = emrMasterService.savePatient(patient);
+			HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.APPLICATION_PDF);
+			System.out.println("res in con "+response.getReport());
+			byte[] input="manikanta".getBytes();
+			System.out.println("in b"+input);
+			String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport())
+;			System.out.println("base64 "+encodeBase64String);
+			return new ResponseEntity<byte[]>(response.getReport(),HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void setPatientProperties(Patient patient) {
 		patient.setPatientId("MRD0002");
+		if (patient.getPatientAddress() != null) {
+			patient.getPatientAddress().setPatient(patient);
+		}
 		patient.getEpisodes().parallelStream().forEach(ep -> {
 			ep.setPatient(patient);
 			ep.setEpisodeId("DVN002");
-			ep.getDiseaseHistory().setEpisode(ep);
-			ep.getEyeHealth().setEpisode(ep);
-			ep.getFamilyHistory().setEpisode(ep);
-			ep.getHeartHealth().setEpisode(ep);
-			ep.getFeetHealth().setEpisode(ep);
-			ep.getKidneyHealth().setEpisode(ep);
-			ep.getNextAppointments().setEpisode(ep);
+			setDiseaseHistory(ep);
+			setEyeHealth(ep);
+			setFamilyHistory(ep);
+			setHeartHealth(ep);
+			setFeetHealth(ep);
+			setKidneyHealth(ep);
+			setNextAppointments(ep);
+
 		});
-		System.out.println("patient model " + patient);
-		emrMasterService.savePatient(patient);
-		return new ResponseEntity("Hello", HttpStatus.OK);
 	}
+
+	public void setDiseaseHistory(Episode ep) {
+		if (ep.getDiseaseHistory() != null) {
+			ep.getDiseaseHistory().setEpisode(ep);
+			if (ep.getDiseaseHistory().getComorBidities() != null) {
+				ep.getDiseaseHistory().setComorBidities(
+						ep.getDiseaseHistory().getComorBidities().replaceAll("\\[", "").replaceAll("\\]", ""));
+			}
+		}
+	}
+
+	public void setEyeHealth(Episode ep) {
+		if (ep.getEyeHealth() != null) {
+			ep.getEyeHealth().setEpisode(ep);
+		}
+	}
+
+	public void setFamilyHistory(Episode ep) {
+		if (ep.getFamilyHistory() != null) {
+			ep.getFamilyHistory().setEpisode(ep);
+		}
+	}
+
+	public void setHeartHealth(Episode ep) {
+		if (ep.getHeartHealth() != null) {
+			ep.getHeartHealth().setEpisode(ep);
+		}
+	}
+
+	public void setFeetHealth(Episode ep) {
+		if (ep.getFeetHealth() != null) {
+			ep.getFeetHealth().setEpisode(ep);
+		}
+	}
+
+	public void setKidneyHealth(Episode ep) {
+		if (ep.getKidneyHealth() != null) {
+			ep.getKidneyHealth().setEpisode(ep);
+		}
+	}
+
+	public void setNextAppointments(Episode ep) {
+		if (ep.getNextAppointments() != null) {
+			ep.getNextAppointments().setEpisode(ep);
+		}
+	}
+
 }

@@ -6,6 +6,7 @@ import com.decode.masters.dto.CombrobiditiesMastersDTO;
 import com.decode.masters.dto.DiabetecTypesDTO;
 import com.decode.masters.dto.DiabetesMastersDTO;
 import com.decode.masters.dto.DiseaseInterventionMastersDTO;
+import com.decode.masters.dto.EmrResponse;
 import com.decode.masters.dto.FeetObservationMastersDTO;
 import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
@@ -41,6 +42,6 @@ public interface EmrMasterService {
 	public List<SuggestedHeartInterventionDTO> getSuggestedHeartIntervention();
 
 	public List<SuggestedKidneyInterventionDTO> getSuggestedKidneyIntervention();
-	public String savePatient(Patient patient);
+	public EmrResponse savePatient(Patient patient);
 	
 }

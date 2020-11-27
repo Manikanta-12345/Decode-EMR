@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface DecodeBirtService {
 
-	public void generateReport(Map<Object,Object> reportParams,String reportFormat);
+	public byte[] generateReport(Map<Object,Object> reportParams,String reportFormat);
 }
