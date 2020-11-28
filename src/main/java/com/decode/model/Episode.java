@@ -5,11 +5,14 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "decode_episode")
 public class Episode {
 	@Id
+	@GenericGenerator(name = "episode_id_generator", strategy = "com.decode.utils.EpisodeSequenceIdGenerator")
+	@GeneratedValue(generator = "episode_id_generator")
 	@Column(name = "episode_id")
 	private String episodeId;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -30,23 +35,36 @@ public class Episode {
 	private Date createdDate;
 	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private DiseaseHistory diseaseHistory;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private DiseaseSeverityAndControlStatus diseaseSeverity;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private EyeHealth eyeHealth;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private KidneyHealth kidneyHealth;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private HeartHealth heartHealth;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private FamilyHistory familyHistory;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private FeetHealth feetHealth;
-	@OneToOne(mappedBy = "episode",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
 	private NextAppointments nextAppointments;
+	@Column(name = "org_id")
+	private int orgId;
+	@Column(name = "loc_id")
+	private int locationId;
+	@Column(name = "episode_status")
+    private String status;
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getEpisodeId() {
 		return episodeId;
@@ -160,6 +178,22 @@ public class Episode {
 		this.nextAppointments = nextAppointments;
 	}
 
+	public int getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(int orgId) {
+		this.orgId = orgId;
+	}
+
+	public int getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
+	}
+
 	@Override
 	public String toString() {
 		return "Episode [episodeId=" + episodeId + ", diseaseHistory=" + diseaseHistory + ", diseaseSeverity="
@@ -167,7 +201,5 @@ public class Episode {
 				+ heartHealth + ", familyHistory=" + familyHistory + ", feetHealth=" + feetHealth
 				+ ", nextAppointments=" + nextAppointments + "]";
 	}
-
-	
 
 }

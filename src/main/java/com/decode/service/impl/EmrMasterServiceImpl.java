@@ -21,12 +21,15 @@ import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
 import com.decode.masters.dto.SuggestedHeartInterventionDTO;
 import com.decode.masters.dto.SuggestedKidneyInterventionDTO;
+import com.decode.model.GlobalSequenceCounters;
 import com.decode.model.Patient;
 import com.decode.repository.CombrobiditiesMastersRepository;
 import com.decode.repository.DiabeticTypesRepository;
 import com.decode.repository.DiabetisMastersRepository;
 import com.decode.repository.DiseaseInterventionMastersRepository;
+import com.decode.repository.EmrDao;
 import com.decode.repository.FeetObservationMastersRepository;
+import com.decode.repository.GlobalSequenceRepository;
 import com.decode.repository.HabitualPatternMastersRepository;
 import com.decode.repository.LifeStyleMedicationRespository;
 import com.decode.repository.MedicationMastersRepository;
@@ -67,9 +70,13 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	@Autowired
 	private SuggestedKidneyInterventionRepository suggestedKidneyInterventionRepository;
 	@Autowired
+	private GlobalSequenceRepository sequenceRepository;
+	@Autowired
 	private PatientRepository patientRepository;
 	@Autowired
 	private DecodeBirtService decodeBirtService;
+	@Autowired
+	private EmrDao emrDao;
 
 	@Override
 	public List<DiabetesMastersDTO> getDiabetesMasters() {
@@ -226,7 +233,21 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 		response.setReport(report);
 		response.setMessage("Patient Created Successfully");
 		response.setStatusCode("Success");
-		System.out.println("before return "+response.getReport());
+		System.out.println("before return " + response.getReport());
 		return response;
+	}
+
+	@Override
+	public void updateGlobalCounter(GlobalSequenceCounters globalCounter) {
+		sequenceRepository.save(globalCounter);
+	}
+
+	@Override
+	public GlobalSequenceCounters getSequenceCounter(int orgId) {
+		return emrDao.getPatientSequenceCounter(orgId);
+	}
+	@Override
+	public GlobalSequenceCounters getEpisodeCounter(int orgId,int locId) {
+		return emrDao.getEpisodeSequenceCounter(orgId,locId);
 	}
 }

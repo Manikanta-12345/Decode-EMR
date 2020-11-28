@@ -1,22 +1,16 @@
 package com.decode.masters.dto;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import com.decode.model.Episode;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DiseaseSeverityAndControlStatusDto {
 	private int id;
 	private String hbA1c;
 	private String bloodSugarLevels;
-	private String suggestedInterventionForDisease;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+	private List<String> suggestedInterventionForDisease;
 	private String suggestedHba1cMonitoring;
 	private String suggestedPlasma;
 	private String createduser;
@@ -41,10 +35,11 @@ public class DiseaseSeverityAndControlStatusDto {
 	public void setBloodSugarLevels(String bloodSugarLevels) {
 		this.bloodSugarLevels = bloodSugarLevels;
 	}
-	public String getSuggestedInterventionForDisease() {
+	
+	public List<String> getSuggestedInterventionForDisease() {
 		return suggestedInterventionForDisease;
 	}
-	public void setSuggestedInterventionForDisease(String suggestedInterventionForDisease) {
+	public void setSuggestedInterventionForDisease(List<String> suggestedInterventionForDisease) {
 		this.suggestedInterventionForDisease = suggestedInterventionForDisease;
 	}
 	public String getSuggestedHba1cMonitoring() {

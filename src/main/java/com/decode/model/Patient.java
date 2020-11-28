@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -14,11 +15,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "decode_patient")
 public class Patient {
 	@Id
+	@GenericGenerator(name = "patient_id_generator", strategy = "com.decode.utils.PatientSequenceIdGenerator")
+	@GeneratedValue(generator = "patient_id_generator")
 	@Column(name = "patient_id")
 	private String patientId;
 	@Column(name = "first_name")
@@ -59,7 +63,10 @@ public class Patient {
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id")
 	private Set<Episode> episodes;
+	
 
+	@Column(name = "org_id")
+    private int orgId;
 	public String getPatientId() {
 		return patientId;
 	}
@@ -158,6 +165,13 @@ public class Patient {
 
 	public int getDistrictId() {
 		return districtId;
+	}
+	public int getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(int orgId) {
+		this.orgId = orgId;
 	}
 
 	public void setDistrictId(int districtId) {

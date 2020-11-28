@@ -30,9 +30,17 @@ public class PatientDto {
 	private AddressDto patientAddress;
 	
 	private List<EpisodeDto> episodes;
-
+    private int orgId;
 	public String getPatientId() {
 		return patientId;
+	}
+
+	public int getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(int orgId) {
+		this.orgId = orgId;
 	}
 
 	public void setPatientId(String patientId) {

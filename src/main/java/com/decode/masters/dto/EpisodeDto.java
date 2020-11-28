@@ -31,6 +31,15 @@ public class EpisodeDto {
 	private FamilyHistoryDto familyHistory;
 
 	private FeetHealthDto feetHealth;
+	private int orgId;
+    private int locationId;
+	public int getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
+	}
 
 	public String getEpisodeId() {
 		return episodeId;
@@ -139,4 +148,11 @@ public class EpisodeDto {
 	}
 
 	private NextAppointmentsDto nextAppointments;
+	public int getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(int orgId) {
+		this.orgId = orgId;
+	}
 }

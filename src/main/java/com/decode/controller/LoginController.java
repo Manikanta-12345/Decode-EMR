@@ -14,6 +14,7 @@ public class LoginController {
 	@GetMapping(value = "/userlogin")
 	public ResponseEntity<User> login() {
 		User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
 		return new ResponseEntity<User>(principal, HttpStatus.OK);
 	}
 }

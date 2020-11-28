@@ -15,6 +15,7 @@ import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
 import com.decode.masters.dto.SuggestedHeartInterventionDTO;
 import com.decode.masters.dto.SuggestedKidneyInterventionDTO;
+import com.decode.model.GlobalSequenceCounters;
 import com.decode.model.Patient;
 
 public interface EmrMasterService {
@@ -43,5 +44,7 @@ public interface EmrMasterService {
 
 	public List<SuggestedKidneyInterventionDTO> getSuggestedKidneyIntervention();
 	public EmrResponse savePatient(Patient patient);
-	
+	public void updateGlobalCounter(GlobalSequenceCounters globalCounter);
+	public GlobalSequenceCounters getSequenceCounter(int orgId);
+	public GlobalSequenceCounters getEpisodeCounter(int orgId,int locId);
 }
