@@ -3205,6 +3205,18 @@ from kidney_health where episode_id=?]]></xml-property>
                     <text-property name="displayName">episode_id</text-property>
                     <text-property name="heading">episode_id</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">left_eye_notes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">left_eye_notes</text-property>
+                    <text-property name="heading">left_eye_notes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">right_eye_notes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">right_eye_notes</text-property>
+                    <text-property name="heading">right_eye_notes</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -3258,6 +3270,16 @@ from kidney_health where episode_id=?]]></xml-property>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">episode_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">left_eye_notes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">right_eye_notes</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -3320,29 +3342,26 @@ from kidney_health where episode_id=?]]></xml-property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">left_eye_notes</property>
+                    <property name="nativeName">left_eye_notes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">right_eye_notes</property>
+                    <property name="nativeName">right_eye_notes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select *
 from eye_health where episode_id=?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
-  <DataSetParameters>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>1</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -4463,50 +4482,287 @@ from next_appointments where episode_id=?]]></xml-property>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="22">
+                    <property name="textAlign">justify</property>
+                    <column id="23">
+                        <property name="width">26%</property>
+                    </column>
+                    <column id="24">
+                        <property name="width">22%</property>
+                    </column>
+                    <column id="25">
+                        <property name="width">51%</property>
+                    </column>
+                    <row id="26">
+                        <property name="height">0.3020833333333333in</property>
+                        <cell id="27">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">3</property>
+                            <image id="2761">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="height">93px</property>
+                                <property name="width">195px</property>
+                                <property name="source">embed</property>
+                                <property name="imageName">decode.jpeg</property>
+                            </image>
+                        </cell>
+                        <cell id="28"/>
+                        <cell id="29">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">3</property>
+                            <grid id="2803">
+                                <column id="2804"/>
+                                <column id="2805"/>
+                                <row id="2806">
+                                    <property name="height">0.3541666666666667in</property>
+                                    <cell id="2807"/>
+                                    <cell id="2808"/>
+                                </row>
+                                <row id="2809">
+                                    <cell id="2810"/>
+                                    <cell id="2811">
+                                        <text id="2817">
+                                            <property name="backgroundAttachment">scroll</property>
+                                            <property name="backgroundPositionX">0%</property>
+                                            <property name="backgroundPositionY">0%</property>
+                                            <property name="backgroundRepeat">repeat</property>
+                                            <property name="fontFamily">"Helvetica", sans-serif</property>
+                                            <property name="fontSize">10pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="fontStyle">normal</property>
+                                            <property name="fontVariant">normal</property>
+                                            <property name="color">black</property>
+                                            <property name="textLineThrough">none</property>
+                                            <property name="textOverline">none</property>
+                                            <property name="textUnderline">none</property>
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">black</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderLeftWidth">medium</property>
+                                            <property name="borderRightColor">black</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderRightWidth">medium</property>
+                                            <property name="borderTopColor">black</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <property name="borderTopWidth">medium</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="paddingBottom">1pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="textIndent">0em</property>
+                                            <property name="letterSpacing">normal</property>
+                                            <property name="lineHeight">normal</property>
+                                            <property name="orphans">2</property>
+                                            <property name="textTransform">none</property>
+                                            <property name="whiteSpace">normal</property>
+                                            <property name="widows">2</property>
+                                            <property name="wordSpacing">normal</property>
+                                            <property name="display">block</property>
+                                            <property name="pageBreakAfter">auto</property>
+                                            <property name="pageBreakBefore">auto</property>
+                                            <property name="pageBreakInside">auto</property>
+                                            <property name="showIfBlank">false</property>
+                                            <property name="canShrink">false</property>
+                                            <property name="overflow">hidden</property>
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[DIABETES MONITORING]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                                <row id="2812">
+                                    <cell id="2813"/>
+                                    <cell id="2814">
+                                        <text id="2816">
+                                            <property name="backgroundAttachment">scroll</property>
+                                            <property name="backgroundPositionX">0%</property>
+                                            <property name="backgroundPositionY">0%</property>
+                                            <property name="backgroundRepeat">repeat</property>
+                                            <property name="fontFamily">"Helvetica", sans-serif</property>
+                                            <property name="fontSize">10pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="fontStyle">normal</property>
+                                            <property name="fontVariant">normal</property>
+                                            <property name="color">black</property>
+                                            <property name="textLineThrough">none</property>
+                                            <property name="textOverline">none</property>
+                                            <property name="textUnderline">none</property>
+                                            <property name="borderBottomColor">black</property>
+                                            <property name="borderBottomStyle">none</property>
+                                            <property name="borderBottomWidth">medium</property>
+                                            <property name="borderLeftColor">black</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderLeftWidth">medium</property>
+                                            <property name="borderRightColor">black</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderRightWidth">medium</property>
+                                            <property name="borderTopColor">black</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <property name="borderTopWidth">medium</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="paddingBottom">1pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="textIndent">0em</property>
+                                            <property name="letterSpacing">normal</property>
+                                            <property name="lineHeight">normal</property>
+                                            <property name="orphans">2</property>
+                                            <property name="textTransform">none</property>
+                                            <property name="whiteSpace">normal</property>
+                                            <property name="widows">2</property>
+                                            <property name="wordSpacing">normal</property>
+                                            <property name="display">block</property>
+                                            <property name="pageBreakAfter">auto</property>
+                                            <property name="pageBreakBefore">auto</property>
+                                            <property name="pageBreakInside">auto</property>
+                                            <property name="showIfBlank">false</property>
+                                            <property name="canShrink">false</property>
+                                            <property name="overflow">hidden</property>
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[QUALITY DIAGNOSTICS]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="30">
+                        <cell id="32">
+                            <text id="2769">
+                                <property name="backgroundAttachment">scroll</property>
+                                <property name="backgroundPositionX">0%</property>
+                                <property name="backgroundPositionY">0%</property>
+                                <property name="backgroundRepeat">repeat</property>
+                                <property name="fontFamily">"Helvetica", sans-serif</property>
+                                <property name="fontSize">10pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="fontStyle">normal</property>
+                                <property name="fontVariant">normal</property>
+                                <property name="color">black</property>
+                                <property name="textLineThrough">none</property>
+                                <property name="textOverline">none</property>
+                                <property name="textUnderline">none</property>
+                                <property name="borderLeftColor">black</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightColor">black</property>
+                                <property name="borderRightStyle">none</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="borderTopColor">black</property>
+                                <property name="borderTopStyle">none</property>
+                                <property name="borderTopWidth">medium</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="marginLeft">0pt</property>
+                                <property name="marginBottom">0pt</property>
+                                <property name="marginRight">0pt</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">1pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">1pt</property>
+                                <property name="textAlign">left</property>
+                                <property name="letterSpacing">normal</property>
+                                <property name="lineHeight">normal</property>
+                                <property name="orphans">2</property>
+                                <property name="textTransform">none</property>
+                                <property name="whiteSpace">normal</property>
+                                <property name="widows">2</property>
+                                <property name="wordSpacing">normal</property>
+                                <property name="display">block</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <property name="showIfBlank">false</property>
+                                <property name="canShrink">false</property>
+                                <property name="overflow">hidden</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Diabetic Education &amp;
+Comprehensive 
+Disease Evaluation]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="34">
+                        <cell id="36"/>
+                    </row>
+                </grid>
+            </page-header>
             <page-footer>
                 <text id="3">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                    <property name="fontSize">13px</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">5%</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">left</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
                     <property name="contentType">html</property>
-                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                    <text-property name="content"><![CDATA[A Unit of Credible Healthcare Private Limited,4th Floor,P3 Residency Jaihind Gandhi Enclave,Madhapur,Hyderabad]]></text-property>
                 </text>
             </page-footer>
         </simple-master-page>
     </page-setup>
     <body>
         <grid id="15">
-            <property name="height">13.572916666666666in</property>
+            <property name="height">14.479166666666666in</property>
             <column id="16"/>
             <row id="17">
-                <property name="height">13.572916666666666in</property>
+                <property name="tagType">p</property>
+                <property name="fontSize">15px</property>
+                <property name="fontWeight">bold</property>
+                <property name="verticalAlign">bottom</property>
                 <cell id="18">
-                    <grid id="22">
-                        <column id="23">
-                            <property name="width">25%</property>
-                        </column>
-                        <column id="24">
-                            <property name="width">50%</property>
-                        </column>
-                        <column id="25">
-                            <property name="width">25%</property>
-                        </column>
-                        <row id="26">
-                            <cell id="27">
-                                <property name="colSpan">1</property>
-                                <property name="rowSpan">3</property>
-                                <image id="2761"/>
-                            </cell>
-                            <cell id="28"/>
-                            <cell id="29">
-                                <property name="colSpan">1</property>
-                                <property name="rowSpan">3</property>
-                            </cell>
-                        </row>
-                        <row id="30">
-                            <cell id="32"/>
-                        </row>
-                        <row id="34">
-                            <cell id="36"/>
-                        </row>
-                    </grid>
                     <label id="39">
                         <property name="backgroundAttachment">scroll</property>
                         <property name="backgroundPositionX">0%</property>
@@ -7020,7 +7276,66 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Interventions]]></text-property>
                                 </text>
-                                <label id="2246"/>
+                                <data id="2764">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <property name="dataSet">disease_severity</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">suggested_disease_intervention</property>
+                                            <text-property name="displayName">suggested_disease_intervention</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["suggested_disease_intervention"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">suggested_disease_intervention</property>
+                                </data>
                             </cell>
                         </row>
                     </grid>
@@ -7102,6 +7417,7 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <row id="2310">
                                         <cell id="2311">
                                             <grid id="2340">
+                                                <property name="pageBreakBefore">auto</property>
                                                 <column id="2341">
                                                     <property name="width">50%</property>
                                                 </column>
@@ -9152,7 +9468,66 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Intervention]]></text-property>
                                 </text>
-                                <label id="2281"/>
+                                <data id="2765">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <property name="dataSet">heart_health</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">suggested_heart_intervention</property>
+                                            <text-property name="displayName">suggested_heart_intervention</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["suggested_heart_intervention"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">suggested_heart_intervention</property>
+                                </data>
                             </cell>
                         </row>
                     </grid>
@@ -10719,7 +11094,66 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Right Eye]]></text-property>
                                 </text>
-                                <label id="2575"/>
+                                <data id="2767">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <property name="dataSet">eye_health</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">right_eye_notes</property>
+                                            <text-property name="displayName">right_eye_notes</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["right_eye_notes"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">right_eye_notes</property>
+                                </data>
                                 <text id="2576">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
@@ -10773,7 +11207,66 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Left Eye]]></text-property>
                                 </text>
-                                <label id="2577"/>
+                                <data id="2766">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <property name="dataSet">eye_health</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">left_eye_notes</property>
+                                            <text-property name="displayName">left_eye_notes</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["left_eye_notes"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">left_eye_notes</property>
+                                </data>
                                 <text id="2578">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
@@ -10827,11 +11320,71 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Intervention]]></text-property>
                                 </text>
-                                <label id="2579"/>
+                                <data id="2768">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <property name="dataSet">eye_health</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">suggested_eye_intervention</property>
+                                            <text-property name="displayName">suggested_eye_intervention</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["suggested_eye_intervention"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">suggested_eye_intervention</property>
+                                </data>
                             </cell>
                         </row>
                     </grid>
                     <grid id="2580">
+                        <property name="fontSize">10pt</property>
                         <property name="height">1.3541666666666667in</property>
                         <column id="2581"/>
                         <row id="2582">
@@ -11331,12 +11884,62 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Intervention]]></text-property>
                                 </text>
-                                <label id="2623"/>
+                                <label id="2623">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Helvetica", sans-serif</property>
+                                    <property name="fontSize">13px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <text-property name="text">Strict HbA1c Control </text-property>
+                                </label>
                             </cell>
                         </row>
                     </grid>
                     <grid id="2625">
-                        <property name="height">1.3333333333333333in</property>
+                        <property name="height">1.6666666666666667in</property>
                         <column id="2626"/>
                         <row id="2627">
                             <property name="height">1.3333333333333333in</property>
@@ -11403,6 +12006,7 @@ from next_appointments where episode_id=?]]></xml-property>
                                     <text-property name="content"><![CDATA[Next Appointments]]></text-property>
                                 </text>
                                 <grid id="2630">
+                                    <property name="masterPage">Simple MasterPage</property>
                                     <column id="2631">
                                         <property name="width">45%</property>
                                     </column>
@@ -12742,4 +13346,413 @@ from next_appointments where episode_id=?]]></xml-property>
             </row>
         </grid>
     </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">decode.jpeg</property>
+            <property name="type">image/jpeg</property>
+            <property name="data">
+                /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcI
+                CQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwM
+                DAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAEYAckDASIAAhEBAxEB/8QA
+                HwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIh
+                MUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVW
+                V1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXG
+                x8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQF
+                BgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
+                YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOE
+                hYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq
+                8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooo
+                AKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooo
+                AKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoooo
+                AKKKKACiiigAooooAKKKKACiiigAoqO7u4tPtJZ55EihhQySSOcKigZJJ7ACvhL9q39t7X/Hup3Ol+Fr
+                260Tw/ETGJYGMVzferM4+ZVPZQRx97OcD5viTijB5LRVTE6yl8MVu/8AJLqzmxWKhQhzSPu17yKO4WJp
+                Y1lflULAM30FSV+K/iyaa8u5J5ZZJZnbc0jsWZj6k9c13P7Pn/BQXx3+zZr8KSX914k8NbgLjSr6cuFT
+                p+5kbLREdgPl9VPWvmsr8R6GJqctak4J9b833qy/U+d/1qpRqctaFl3vf8LH630Vz/ws+J2j/GX4faV4
+                n0C5+16TrEAngkxhhyQysOzKwKkdipFdBX6RGSlFSjqmfUxkpRUou6YUUUUygooooAKKKKACiiigAooo
+                oAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooo
+                oAKKK5n4vfGPwx8BfAN94n8X6zZ6Foenrma5uXwCT0RQPmd26BFBYnoDVQhKclCCu3siZTjGLlJ2SOmr
+                z343/tXfDn9nC08zxr4w0XQZChkS1lm33cy+qQJulcf7qnrX5d/tn/8ABdTxj8WtQvND+FizeC/DW5ov
+                7UYA6tfr03A8i3B7BMvwDvGdo+IbrWbvxDqtxfX91c317dOZZ7i4laWWZzyWZmJJJ9Sa/SMo8Oq9WKq4
+                +XIv5VrL59F+J8HmnHVGk3TwUed93t8ur/A/X34hf8F6/hjoNxJD4b8O+KvErJ0mdI7G3k+hZmk/OMV5
+                4f8Ag4BvriYmL4W2kcZ6K/iBnI/H7OP5V+alj1rYsv6V9jS4GyemrOm5ebk/0aR8jV4zzWbvGaj6RX6p
+                n6TaH/wXsllul+3fDGPySRloNeO5R3ODb4P0yPrXsHwx/wCCzHwp8bXCw6xB4h8KyMQPNu7UXFvz/tQl
+                n/NAK/JGz6VrWHQVjieBsomrQg4+kn+ty6HGmaQd5TUvVL9LH74fDz4qeG/i1o39oeGdd0rXbPgNJZXK
+                zeWTzhgDlT7Ng1v1+Dnw98d6z8OPEEGraBql9o+pW/8Aq7m0maKQDgkEg8g45B4PcV95/sk/8FaWvJbb
+                Q/iiqAtiOLXraLaM/wDTxEvA/wB9AB6r1NfC5xwLicNF1cI/aR7fa/4Py18j7LKeNsNiJKlil7OXf7P/
+                AAPnp5n3hRUGmapba1p0N3Zzw3VrcoJIZoXDxyqeQysOCD6ip6+Ed1oz7e99UeVftoeJJfD3wA1VYGKP
+                qLx2ZYddrNlx+Kqw+hNfnj4jh+9X6Q/tR+BZ/iD8E9Xs7RDLeW6rdwoBkuYzuIA9Su4D3Ir86vEcHWv5
+                t8XY1455SnP4HTXL20k7/PVX9UeHm0W9TzbxJD96uB8SQ/er0nxHDwa4HxHB1rwcpqbH5/mED7w/4Ig/
+                EK61j4aeOPDEzyPb6BqFve2+45EYukkDKvPA3W5bHTLk9zX3HXx9/wAEbvgzd+AfgVrXia+ga3l8Y3yN
+                bBlw0lrArKj8jOC7zY9sEda+wa/pfh5TWW0VU3t+F9PwsfofD0akcupKpvb8Lu34WCiiivZPZCiiigAo
+                oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo
+                oooAKKKKACiikLbRk8AdTQBxn7Qfx/8ADP7MPwk1fxp4uvhY6NpEe58DdLcSHhIYlyN0jtgAfiSACR+C
+                H7dP7fXiz9u/4qPq2rySad4csXZdG0OOUmCwj/vN2eZh95yOegwoAHd/8Fjv+Cgcv7Yn7Qcvh7Qb3zPh
+                74IuHtdO8qTMWqXIyst4exBOUj6/IMjHmMK+TbPrX7rwVwrDBUVjcSv3slp/dT/V9e23e/49xbxHLF1X
+                hMO/3cd/7z/yXT7+xsWfWtWx61lWfWtWx6191I+LNix61sWX9Kx7HrWxZf0rKQjYs+la1h0FZNn0rWsO
+                grGRRrWXQVsWX9Kx7LoK2LL+lYyA+oP2E/25b/8AZz1mPQ9ckuL/AMFXsnzx8vJpbk8yxD+7/eQdeo5y
+                G/TnSdWtte0u3vbK4hu7O7jWaCeJw8cyMMqykcEEEHNfh9YdRX3H/wAEt/2oZLS+/wCFb61cbre4DzaJ
+                I5/1TjLSW+fRhll9CGHO4Afm/GfDkakJZhhl7y+Jd139V17o/QuD+IpQmsBiX7r+F9n29H07M+5q+aP2
+                lP2D/wDhONTudZ8IzW1pd3LGSfT5zshkc8lo2A+Un+6RjPcdK+l6K/EM8yDA5vQ+r46HMlqns0+6f9J9
+                T9NrUY1Y8sz8x/En7EfxR+2tAvhC/kfdtDRyxMh7feD4x+Nd98AP+CTmqa7rtvqXxHmh0/TIWEh0m0nE
+                lxckH7kki/KinvsZmIJ5U8199UV81lnhzleDqKpeU7dJNW+dkrnkrIMK5887y8nsV9J0m20HS7axsreK
+                1s7OJYIIYkCpCigBVUDgAAAAVYoor77bRHt7aIKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig
+                AooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvk7/AILPftXS/sr/ALEO
+                uPpl19l8SeM5B4e0t0YiSLzVYzyrjkFYFkw3Z2T2B+sa/Fr/AIOTfjPL4o/af8G+B42P2LwnoZv5BuPN
+                zdyncCOnEUEJB/2z+P03CGWrG5rSpTV4r3n6LX8XZHg8TY94TLqlSHxPRer0/BXZ+eVn1rYs+tY9n1rY
+                s+tf0ez8FNiz61q2PWsqz61q2PWsZFmxY9a2LL+lY9j1rYsv6VlIRsWfStaw6Csmz6VrWHQVjIo1rLoK
+                2LL+lY9l0FbFl/SsZAbFh1FdJ4S1y68Ma5ZalYzNb3thOlxbyr1jkRgysPoQK5uw6itmw7VhUSaaY02n
+                dH7E/Bj4lW/xg+FeheJbYKq6taJM6KciKTpImf8AZcMv4V09fKv/AASi8fNrXwl13w/I+59Dv1niB/hi
+                nU4A/wCBxyH/AIFX1VX89ZxgvqmNqYdbJ6ej1X4H9A5PjfreCp4h7ta+uz/EKraxrNp4e0ya8v7q3srS
+                3XfLPPII44x6ljwKq+MvF9h4C8MXmr6nN5FlYxmSRu59AB3JOAB3JFfAf7RX7Qms/HLXWe5ke20m3c/Z
+                LBG+SMc4Zv7z46n8sCvyXxC8SMDwtQipr2lefwwvbT+aT6R/FvRdWv0LhLg/EZ3WdnyUo/FL9F3f5fcn
+                9E/Ez/go94P8HTywaNZ6h4jniyBJHi3tmI7B2Bb8QhHoTXmt3/wVjvIGOPA9tjtnVW/+NV8w6l3rA1L+
+                lfznU8ZuKcVV9pCsqa/ljCNv/JlJ/ifvuXeF3D1Omo1KTm+8pSv/AOStL8D7n+H/APwVa8Ga9dxweItI
+                1Xw20nWdSL23j/3ioV/yQ19J+EPGmk+P9Bh1TRNRs9V0+4/1dxayiRG9RkdCO46jvX4z6j/Sun/Z/wD2
+                nPE37MvjePVNDuXksncfbtNkc/Zr9O4Ydmx91wMg+oyD+h8K+MeNVRUs5ipwf2oq0l5tLRr0SfrseVxF
+                4LYOvRdXJZOFRfZk7xfld6p+bbXpufsJRXI/A3406L+0B8NNP8T6FIzWl6pDxPjzbWUcPE4HRlP4EYI4
+                INddX9GUK9OtTjWpO8ZK6a6pn83YnDVcPWlQrxcZxbTT3TW6CiiitTAKKKKACiiigAooooAKKKKACiii
+                gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACv53P+Cz3iSTxP8A8FN/
+                ilK8kjra3VnZxhukaxWNumAOwyGPuST3r+iOv5zP+CvllJYf8FLviykowzapFIOc/K9rAy/oRX6P4Ypf
+                2lUf9x/+lRPhfEBv6hBf31+UjwCz61sWfWsez61sWfWv25n5CbFn1rVsetZVn1rVsetYyLNix61sWX9K
+                x7HrWxZf0rKQjYs+la1h0FZNn0rWsOgrGRRrWXQVsWX9Kx7LoK2LL+lYyA2LDqK2bDtWNYdRWzYdqxkB
+                9e/8EmNaMHxY8TaduOLrSBclexMcyLn/AMin86+86+Af+CT1m7/HXXbjjZHoEkZ9ctcW5H/oJr7+r8T4
+                1SWaSt2X5H7RwU28rjfu/wAz5X/4KA/EmS61jT/C0EhFvaxi9ugD9+RshFP+6uT/AMDHpXyzqXevWf2q
+                NROqfHXxLIckrdeTz6IioP8A0GvJtS71/l34g51WzTinG4iq/hqShHyjB8q/BX9Wz+3eDcDDCZTQpQW8
+                U36y1f5nP6l3rA1L+lb+pd6wNS/pXnYLoffYYwdR/pWDqH3q3tR/pWDqH3q+swZ7tA+nP+CS3x3l8C/H
+                a48G3Mzf2X4viYwoT8sV5EpdWHYbow6n1IT0r9La/Fb9mzVp9D/aT8BXVu2yWPxDYAH1BuEBB9iCQfrX
+                7U1/VPhLmFSvlM8PP/l3Ky9Gr2++/wB5/L/jnlVLD5zSxdNWdWGvrF2v91l8gooor9UPxMKKKKACiiig
+                AooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvwg/
+                4OEvhU3gT/goRca4sDJB410Oy1HzeSsksSm0YegIW3jyB/eB71+79fnT/wAHGf7NUnxG/Zo8P/EWwg8y
+                9+H1+Yb4jr9huyiFsd9s6wfQSOa+w4Fx6wub0+Z6TvH79vxSPmOL8G8Rlk+XeNpfdv8Ahc/GOz61sWfW
+                sez61sWfWv6FZ+HGxZ9a1bHrWVZ9a1bHrWMizYsetbFl/Ssex61sWX9KykI2LPpWtYdBWTZ9K1rDoKxk
+                Ua1l0FbFl/Ssey6Ctiy/pWMgNiw6itmw7VjWHUVs2HasZAfc3/BJDwk8em+MddcHZLJb2ER91DvJ/wCh
+                x19lV5T+xV8J3+D37Oeg6fcIY9QvozqV6pGCss2GCkeqpsU+6mvVq/AOIcYsVmNWtHa9l6LT9D974fwj
+                wuXUqMt7Xfq9f1Phr9sfw/JoHx21gsP3d8I7uI/3lZAD/wCPKw/CvFtS719tftwfBqXxz4Li1/T4jJqG
+                hI3nIo+aW2PLf98H5sehaviXUu9f5xeKnDNbJuKMTzr3K0nUg+jU3dr/ALdk2vufVH9f8BZrTx2U0nF+
+                9BKMl5rT8VZnP6l3rA1L+lb+pd6wNS/pXzWC6H6ThjB1H+lYOofere1H+lYOofer6zBnu0Dt/wBjXwNN
+                8Q/2sPAmnwqW8vV4b6XA6RW7ee/0+WMj8a/ZKviX/gkl+zBP4b0u9+JWsW5in1aE2ejRyKQy2+7Mk+P9
+                sqqqf7qsejivtqv628L8nqYLKPa1laVV83/btrR+/f0Z/J/jNn9LMM8WHoO8aEeW/wDeveX3aL1TCiii
+                v0c/IwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+                CiiigAooooAKxfiP8P8ASvix4A1rwxrtqt7o2v2Uun3sDf8ALSKVCjAHscHg9jg1tUU4ycWpR0aE0mrP
+                Y/mc/a6/Ze1r9jr9onxD4D1pXdtLn32N0VwuoWb5MM69vmTGQPusGXqpriLPrX74f8FU/wDgnNZ/t5fC
+                COXShbWXxB8Mq0ui3kh2JdIeXtJWx9x+qn+BwD0Lg/hB4h8Jan4C8UX+i6zY3Omatpdw1rd2lwhSW3lQ
+                4ZWB6EEV/RfCvEUM1wicn+9jpJfqvJ/g9D8L4kyKeXYl8q/dy+F/p6r8Sez61q2PWsqz61q2PWvo5Hz5
+                sWPWtiy/pWPY9a2LL+lZSEbFn0rWsOgrJs+la1h0FYyKNay6Ctiy/pWPZdBWxZf0rGQGxYdRX0P+wD+z
+                lJ8evjDb3F5AX8OeHWS81BmX5JmBzHB77yOR/dVu+K8g+B/wg1z45+PrLw74ftvtF7dnLOxxFbxj70kj
+                dlA/E8AAkgV+tP7PXwI0n9nX4ZWfhzShv8v97d3RXD3s5A3SN+QAHZQB2r4vi7Po4LDuhSf7ya+5d/8A
+                L/gH13CeRSxuIVeqv3cH977f5/8ABO4ooor8VP2YCMivlj9pv9hibUbm41zwTGhaQmS40osF56loSeP+
+                AHHsei19T0V8xxVwhlnEOE+qZlC6WsZLSUX3i/zWqfVHt5FxBjMoxH1jBy9U9muzX9NH5N+LdCvfDWpS
+                2eo2dzY3cJw8NxE0cifVSAa5bUv6V+vHirwLovjm0EGtaRpurQjol5bJMF+m4HH4VxU37H3wyuLrzW8F
+                6LuwRgRkL/3znH6V+C1vo/YulV/2TFxlD+9Fp/hdP8PRH7TgPGjCKC+tYeSl/daa/Gx+U0WkXevajFZ2
+                NrcXt3cHZFBBGZJJD6KoBJP0r6p/ZJ/4JgajrmtWviH4k2/2HTIGEsOiFsz3Z6jzsH5E6ZX7x6Hb3+3f
+                Bvwv8N/DqJk0HQdH0cP982dnHCX+pUAnt19K3a+74W8HsJgKixGY1PbSW0UrR+fWX4LumeLxH4zY3F0X
+                hsrp+xT0cm7z+XSPrq+zRHaWkVhaxwQRxwwwoI4441CrGoGAABwAB2qSiiv2Y/FW29WFFFFABRRRQAUU
+                UUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV+Z/8AwXj+L3iz4afEz4fReHPE/iLw/Fda
+                ZdPMmm6lNarMwlQAsI2GSM96/TCvyt/4OGf+SqfDf/sFXf8A6OSgD4r/AOGq/ih/0Ujx7/4UF3/8co/4
+                ar+KH/RSPHv/AIUF3/8AHK4GigDvv+Gq/ih/0Ujx7/4UF3/8co/4ar+KH/RSPHv/AIUF3/8AHK4GigD1
+                Twt+3H8ZPBl0JbD4oeO0x/yzm1qe4i6g58uRmTPA5xX0D8FP+C6nxe+H1xDH4ph0Tx3YLxJ9ot1sbwjt
+                tlhAQfVomJ+vNfFVFAH7t/si/wDBTr4Y/teyRadpuoSeH/FLj/kCaqVinmOOfJcEpMOvCnfgElQK+ia/
+                mftbuWxuo54JJIZoXDxyIxVkYHIII5BB71+nf/BLb/grhc+KNU0z4a/FXUPPvbgra6L4iuH+a4folvdM
+                ernosp5Y4DZY7iAfpLRRRQAUUUUAFfKf/BRn/gll4W/bl0j+2LJ4PDfxCsYtltqyx/u75QPlhulHLL6O
+                PmT3Hyn6sorrwOPr4OssRhpcsl/XzRzYvB0cVSdGvG8Wfzd/Hz9mPxv+yt48k8PeN9CutHvAzfZ5WG+2
+                vkGP3kMo+WReR0ORnDAHiuWsetf0lfFP4ReGPjd4Qn0HxboWm+INIuOXtr2ESKG7Mp6qw7MpBHY18Ift
+                A/8ABv74Z165nv8A4Z+KLrw3K+WXS9WU3loD2VJh+9Rf94SnnrX67lHiHha0VDHrkl3WsX+q/H1PzDNO
+                BcRSbngnzx7PRr9H+Hofl5Y9a2LL+lfQnj3/AII+/Hn4cXbhPCkHiK2Tpc6PfxTI30Rykv8A45XA3n7H
+                vxY8PTFLz4Z+PYdp27joN0UJ9mCFT+Br7Glm+BrK9KtF/wDbyPka2VY2k7VKUl8mcjZ9K1rDoK7Xwp+x
+                j8W/E0yJa/DXxv8AOMq82jTwRHkD77qq9T6+voa9p+Ff/BIr4yeNZIzqWm6X4VtmIJk1O+Rn29yI4fMb
+                Ps238OtYYrOMDRV6taK+a/LcuhlGOrO1OlJ/J/nsfO9l0Fe1fsv/ALIXjH9p7W1j0SyNtpEThbrVrlSt
+                rbjuAf43/wBhcnpnA5r7U+Af/BH3wJ8N3hvPFt7d+NNQj+byXX7LYKc5H7tSXfH+0+0917V9ZaPo1p4e
+                0uCxsLW3srK1QRwwQRiOOJR0CqMAD6V8JnHH1GKdPL1zP+Z6L5Ld/O3zPssp4FqyaqY92X8q3+b2Xyv8
+                jgf2a/2YfDf7L/gv+y9Diaa6udr3+oTAefeuB1P91RztQcDJ6kkn0eiivy6vXqV6jq1neT3bP0yhQp0a
+                apUlaK2SCiiisTUKKKKACiiigAooooAKKKKACiiigAr5Y/4LHeM9Y8BfsQatqOharqWi6gmp2SLdWF09
+                tMqmXBAdCGwR15r6nr5G/wCC3X/Jg+sf9hWw/wDRtAH5Jf8ADVfxQ/6KR49/8KC7/wDjlH/DVfxQ/wCi
+                kePf/Cgu/wD45XA0UAf0a/s/X02p/AbwTc3M0txcXGgWEsssrl3ldreMlmJ5JJJJJrr64v8AZw/5N48B
+                /wDYu6f/AOk0ddpQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFflb/wcM/8lU+G/wD2Crv/ANHJ
+                X6pV+Vv/AAcM/wDJVPhv/wBgq7/9HJQB+dtXPD2knX9fsbEP5ZvbiOAORnZuYLnH41TrZ+HX/JQdC/7C
+                Nv8A+jFoA/Qr/iHd1P8A6KrYf+E+/wD8kUh/4N3dUxx8VbDPb/iQP/8AH6/UKigD8iPiJ/wQH+KPh2xM
+                /h7xJ4S8SFELNbvJLZTuewTcrIc+rOtfH3xh+Bni/wDZ/wDFjaH4z8Pal4e1JRuWK6iwsy/3o3GUkXPG
+                5CRnvX9HFcL+0N+zh4R/ai+HV14Z8YaXFqFjMCYZgAtxYyYwJYZOqOPyPQggkEA/nVor079r/wDZf1n9
+                kL47ar4M1g+etvi40+8C4W/tHJ8uYDtnBVh2ZGHOM15jQB+0P/BHv9uCb9qD4Ky+GPEd4bjxn4KSOGWW
+                ViZdSsz8sVwxPLOCCjnnkIxOXr7Dr8BP+Ce/7Q8n7Mf7WvhLxG0/k6XNdLpurZbCtZzkJIW9kysg94hX
+                790AFFfPv7aX/BSHwB+xZZG01SZ9c8WTR+Zb6DYuvn4I+V5nORCh45ILEcqrYNfmZ8fP+Cyvxp+Mt/Mm
+                lazF4G0hiwjtNFQJNt7brhsylgO6FB/sjjAB+2tFfzh6/wDG3xn4rvPtGqeLvE+pT/8APW61WeZ+3dmJ
+                7D8qTQvjV4y8LXoudM8W+JtOuB0ltdUnhcfirA0Af0e0V+KH7Pv/AAWd+MvwYvYItZ1OHx7oyEB7XWF/
+                0jb32XKjzN3u/mD2r9P/ANjb9v7wF+2p4fd/D10+n6/aRh77Q70hbu2HQuuOJY8/xr0yNwUnFAHuFFFF
+                ABRXy9+25/wVV8BfseTz6JED4t8aovOkWUwVLIkZH2mbBEfGDsAZ+QdoBBr81fjt/wAFcvjd8bryZY/F
+                MvhDTHJ8uy8PA2flj3nBM5OOvz49AKAP3Lor+b3Vfi94s169a4vvFHiK8uH+9LPqU0jt35JYnqT+dXvC
+                n7Qfj3wLdifRfGvizSZQ27daatPDk8ddrjPQdfSgD+jSivxu/Zw/4LhfFT4U3sFr4yFp8QNEBCv9pVbb
+                UI1/2J0XDHr/AKxGJ/vCv07/AGU/2zfAn7Y3g5tU8H6nvubVV+36XdAR32nM3QSR5PynkB1JQ4ODkEAA
+                9WopskgijLMQqqMkk4AFfB/7Zf8AwXB8L/CK+u9A+Gdna+NdcgLRSapLIRpNs/8AsFTuuMH+6VT0c9KA
+                PvKivwM+MP8AwUi+NnxtvJX1X4ga7Y20hOLLSJzptsq/3SsO0uP98sfevKp/iZ4kuZnkk8Qa3JJIxZma
+                +lJYnkkndyaAP6SKK/nj+Hf7YXxU+E95FN4f+IPi3T/J+7CNTlktz06xOTG3QdVPSvs79lb/AIL1a3o1
+                7b6X8WtIh1ixdlQ63pUSwXUI4BaSAYjkHc7NhA6Kx4oA/U6iue+F3xV8O/GrwRZeI/Cur2Wt6LqC7obq
+                2fcp9VYdVcHgqwDKeCAa6GgAopssqwRM7sqIgLMzHAUDqSa/Pn9tj/guNpXw41S78N/Ce0svEmpW5aKf
+                XbrLafA44IgRSDORz85KpkDG8GgD9CKK/ny+LH7cvxc+Nt7LL4i+IHia5imJza2941paAHsIYtsft92u
+                Eg+JniS2mSSPxBrcckbBlZb6UFSOQQd3BoA/pIr5G/4Ldf8AJg+sf9hWw/8ARtfmf8Df+Cm3xq+Ad9E2
+                neNtT1mwRstp+uyNqNs4/ujzDvQf9c3Xv619Mftgf8FMvCn7bX/BPXWtMeJfDnjmz1GxkudHlk3rcoJR
+                ma3fA3rzyp+ZecgjDEA/OyiiigD+jD9nD/k3jwH/ANi7p/8A6TR12lcX+zh/ybx4D/7F3T//AEmjqp+0
+                X+054M/ZW8BP4h8aavFptpkpbQKN9zfyAZ8uGMcu3T2GcsQOaAO/or8hv2mf+C7HxB+Il7cWXw7srbwN
+                o2Ssd1LGl5qcy56ksDFHkfwqrEdnPWvk/wAcftP/ABH+JV3JNr3jvxdqrSNuK3GrTtGvT7qbtqjgcAAc
+                UAf0U0V/Nxa/FDxLZXCyw+IdcilQ5V0v5VZT7ENXsfwV/wCCofxv+B13EbLxxqWt2UZy1jrzHUoZB/d3
+                SEyIP9x1oA/eSivjr9hz/gsJ4N/ai1C08N+J4IvBfjO5Ijgikm3WGpP2EMpwVc9o35OQFZzX2LQAUUUU
+                AFFFFABRRRQAUUUUAFflb/wcM/8AJVPhv/2Crv8A9HJX6pV+Vv8AwcM/8lU+G/8A2Crv/wBHJQB+dtbP
+                w6/5KDoX/YRt/wD0YtY1bPw6/wCSg6F/2Ebf/wBGLQB/SXRRRQAUUUUAfA//AAX0+BsPir4AeH/HkECf
+                2j4U1EWVxL0JtLkYwfXbMsWAenmNjqc/knX7k/8ABYuJZP8AgnN8QiyqSh01lJH3T/adoMj8CR+NfhtQ
+                AV+w37RP/BTX/hQX7AXw71yxeO6+IXj3w9bGwRsOtpIIEE924PBVHJCg/eYjjAbH481seLfHmreOU0pd
+                UvJbtNE0+PS7FXPFtbRlmWNfbc7n6saAK3ifxRqPjXxDeatq97dalqeozNPdXVzIZJZ5GOSzMeSTVCiv
+                df2B/wBhnW/25PitLpNpcHSfD+kItxrOqGPf9mRiQkaDo0r4baCQAFZjnbggHhVFfu58J/8AglX8C/hN
+                oMdnH4E03X5woEt7rg+3zzn+8Q/7tT7Iij2pfix/wSt+BfxZ0F7OTwJpmgT7SsN7oQ+wTwH+8AnyOeek
+                iMPagD8Iq3fhr8Stc+D/AI503xL4a1K50nW9JmE9rdQNho26EEdGUgkFSCGBIIIJFeqft6fsP63+w58W
+                k0W9uP7U0LVo2udG1QR+X9rjUgOjryFlQlQwBIwyno2B4dQB++f7AH7ZunftrfAi219FhtPEOmsLLXbB
+                DxbXIXO9AefLkHzKecfMuSUNeQf8Fbv+Cisv7K/g6PwZ4QulXx54itzI1yhBOiWpJXzcf89XwQnphm7L
+                n4I/4JQftaw/sqftORyavefZfCfia1ew1Ys3yRlVZ4Jcf3hINn0levFv2iPjZqf7Rfxt8SeNdWY/a9fv
+                XuBGTkW8X3Yoh7JGEQey0AchfX02p3s1zczS3FxcO0sssrl3ldjksxPJJJJJNRUV6X+y5+yb40/a++IQ
+                8PeDtPWeSJRLe3twxjs9OjJwHlfBxnnCgFmwcA4OADzSiv1b+HP/AAb4eCbLRY/+Eu8deKdS1ArmQ6RH
+                BZQqfQCVJmIHTPGeuB0rkP2hP+Df06b4dnvfhl4uutQvrdCy6XrqRqbsjHypcRhVVsZwGTBJGWUZNAH5
+                p11fwV+NfiT9nv4j6d4q8J6lNpesaa+5JEOUlX+KORejxsOCp4NZXiPwJrPhHxpdeHNS0y9s9dsro2U1
+                hJEfPSYNt8vb1Jz0x1yMda9u8X/8E6PGXwe/Zl1D4m/EDb4StfMhtdJ0a4XOpalPKwCh06QKqeY53/OR
+                ERsGQ1AHqv7e/wDwV+1f9qH4XaP4U8J2154V03ULJJPE2JP3t1cfxWsbjn7OMZJ4Mm4AgAEN8TUUUAFF
+                fTH7Cn/BMHxp+2ujawtxH4Y8GQSmJ9XuoTI10wOGS3iyPMK9CxZVByMkgrX3Vof/AAQL+D1johgvtc8e
+                X1464a6W9t4djeqIICB9G3UAfj7RX6A/tg/8ELta+Ffha88RfDPWbzxbZ2EZmn0e8hUakI1GS0TIAsxx
+                zs2o3Hy7iQK/P9lKMQQQQcEHtQB7v+wX+3b4i/Yj+KCX1q02oeFNTkRNb0jd8tzGDjzYwSAsyjO08Z+6
+                eDx+6nw/8e6T8UvBGleItCvI9Q0fWrZLu0uE6SxuMg4PIPYg8ggg8iv5s6/QP/glj/wUE/4UR+yt8VdA
+                1adJH8F6ZJ4h8OxzyYV3kdYTb89FNzLAQBnmeQ4oA6P/AILVf8FCLqfWLv4NeD74w2kCgeKLyByGnc4I
+                slYdEAwZP7xIQ4CuG/Nmreva7eeKNcvNS1C4ku7/AFGd7q5nkOXmldizux9SxJP1qpQAUV9DfsIf8E5/
+                Fv7ceuXE9lNHoPhLTJRDf61PH5gD4B8qGPI8yTaQSMhVBGSMqD+jHgP/AIIbfA3wtpKw6ra+I/E1zj57
+                i81R4Mn2WDywB9c/U0AfjDRX60fH3/ggd4F8S6JcT/DzXdW8M6wqEw22oS/bLCVh0UnAlTPdtz4z901+
+                X/xl+DfiL4A/EfUvCnirTpNM1rSpNk0THKuDyrow4ZGBBDDgg0AcvRRRQB+/H/C/9D/Zh/YT8PeNfELt
+                9g0fwvp7LChHm3kzW0axwp/tOxA9Bkk8A1+Jn7UH7Tvij9rP4r33ivxRdvLLMxSztFY+RpsGcrDEOygd
+                T1Y5JySa+iP+Cr/7SE3izw78KPhnZ3H/ABLfCnhXTNS1CNW+/ez2cZjDD/YgZSP+vhvavjKgAorqPgx8
+                H9d+PnxQ0bwh4btftes65cC3gQkhE4JaRzg4RFDMxxwqk1+wH7NP/BGP4SfBfQLaTxNpg8feItgNxd6l
+                u+yK3dYrYHZt/wCum9vcZxQB+K9Ffvz4l/4Jy/AzxXo8tjc/C7wjDDMMM9nZCzmH+7JDtdfwavzd/wCC
+                nf8AwSp/4ZJ0n/hN/BVzeaj4HlnWG8tro77jRXc4TLgDfCzHaGIBUlQS27NAHxSrFGBBIIOQR2r9dP8A
+                gjr/AMFFLr4/6G3w28bX7XPi/RLfzdMv52zJq9omAyuf4po+Mnq6fMclHY/kVXVfBH4uap8Bvi54e8Y6
+                M+3UfD17HeRDdgSgH542P910LIfZjQB/R1RWT4D8Z2PxG8D6P4g0yTztO12xh1C1f+/FLGsiH/vlhWtQ
+                AUUUUAFFFFABRRRQAV+Vv/Bwz/yVT4b/APYKu/8A0clfqlX5W/8ABwz/AMlU+G//AGCrv/0clAH521s/
+                Dr/koOhf9hG3/wDRi1jVs/Dr/koOhf8AYRt//Ri0Af0l0UUUAFFFU9f1+x8KaHd6nqd3b2GnWELXFzc3
+                EgjigjUZZ2Y8AAAkk0AfHf8AwXV+KUPgz9i8eH/M/wBL8Y6xbWqxBsExQn7S747gNHEPq61+NdfR3/BT
+                j9tT/hs39oKS80x5R4P8No9hoaOu0zJkGS5IPIMrKCAeQioCAQa+caACitHwt4T1DxrqrWWl2sl5dJbX
+                F4YoxlvKgheeVv8AgMcbt/wGs6gAr6E/ZN/4KU+Pf2MvAV74e8Iab4Te11G9a/uJ7+ylmuJZCiIAWWVR
+                tAQYGOMse5r57ooA+1v+H9Pxs/6B/gL/AMFk/wD8fo/4f0/Gz/oH+Av/AAWT/wDx+vimigD6B/a0/wCC
+                kfjv9s/wPYaF4w03wmkGmXovra40+xlhuI32MhUM0rDYwbkY5Kqe1fP1FFABRRRQAV+6H/BJ74Aaf8C/
+                2K/CU8EMf9qeMbSPxBqNyF+ac3Ch4VJ9EhaNQPXceNxr8L6/oR/Yf8eW/wAS/wBj74a6xbyRSCfw7Zwy
+                mL7izRRLDMo5P3ZI3XrnigD1OiiigDjoP2fvBVv8X7nx8vhnST4yu7dLaTVmhDXGxBhdpPCnb8pZQGIA
+                BJAAHwd/wcO+OJrbwt8MvDaE+Re3d9qUwzxuhSGOP9J5f8mv0ir8xf8Ag4k02Yar8KLvYfs7RapDvA4D
+                A2hwfqDx9D6UAfmrXQfCfwFN8Vfin4a8L28ghuPEmq2ulRSEZ8tp5liBx7Fq5+vR/wBj7xzB8Nf2q/hz
+                rt28UVnpviOxlupJPuxw+egkbr2QsfwoA/oD+HfgDSvhV4E0nw3odqllpGiWsdnaQr/BGgwMnuT1J7kk
+                962qKKACvxS/4LR/s+2fwQ/bGudQ0q2W20zxvZJrYjjAEcdyXeO4AH+06CQ+8xx6D9ra/JL/AIOA/HNp
+                rP7R/hDQYDvuND0Ez3LA5CNPMxVD6ELGG+ki0AfBFPjneJHVWZRIu1wDgOMg4PqMgH8BTKKAClVS7AAE
+                knAA70lWtD1V9B1uzvo1V5LOdJ1VujFWDAH24oA/oc/Zd+Bth+zd8AfC3gywiSNdFsUjuHUD9/cMN00p
+                x3aQu34+1d9VLw34gtfFvh2w1WxkE1jqdtHd28g6SRyKGVvxBFXaACvz2/4L+/Amz1r4Q+F/iJb2yjVd
+                E1AaRdzKuGktJld03HuElTC+nnt61+hNfF3/AAXb8Z23h79imHTJCDda/r1rbwJnkCNZJmb6DYB9XFAH
+                42UUUUAdH8WPHkvxL8fX2ryFyJhFBFv+8IYYkhiB+kca1zlWdX0mfQtUuLO6Qx3FtIY5FPYj+Y96rUAe
+                n/so/tX+Iv2O/iLc+KPC9joV3q1xZPYB9TtnnWCN2RmKBXTDHYBn0JHc19D/APD+n42f9A/wF/4LJ/8A
+                4/XxTRQB9rf8P6fjZ/0D/AX/AILJ/wD4/WB8VP8Ags98VvjL8N9c8K65pPgSfSfEFlLY3SrpswcI6kbl
+                JnOHXgqccEA9q+SKKACiiigD90/+CSHjC48Z/wDBPv4fzXRzNZQ3Wn5xwUhupo4/yjVB9Qa+ka+VP+CL
+                Wkf2b/wT48JzYb/iYXmoXHJGDi8lj49v3ffvmvqugAooooAKKKKACiiigAr8rf8Ag4Z/5Kp8N/8AsFXf
+                /o5K/VKvyt/4OGf+SqfDf/sFXf8A6OSgD87a0vB+pxaN4t0u8nyIbS8imkIGSFVwTgfQVm0UAftX/wAP
+                uvgH/wBBjxB/4JpaP+H3XwD/AOgx4g/8E0tfipRQB+vPxI/4L6/Czw7aSr4b8P8Ai3xJeBT5fmRRWNsx
+                7ZdmZx/37PB/Cvgz9sj/AIKX/Eb9soPp2qXMOg+FBIHj0TTSywyYOVMzk7pmHHXC5GQoNfPNFABRRX13
+                /wAEy/8AgmTqv7XHii28T+KLa60z4b6dMGkkZTHJrzq3MEJ4Pl5BDyDpyqndkoAfQn/BE39hZT8Pte+J
+                XiuyIXxbYTaLosEqfMLKTK3Fxg/89MBFOPuq55VxX5x/F34a3/wb+KXiDwpqYIv/AA9qE1hMSu0SGNyu
+                8D0YAMPYiv6ONH0i18P6TbWFjbQ2dlZRLBbwQoEjhjUAKqqOAAAAAPSvzT/4Ll/sQXV1qUfxl8N2TTxG
+                KO08TRQplo9g2xXhA5I27Y3PbbGem4gA/NCvrj/glR8Wvg/oXjbUfCPxg8MeEL3T9ckSXS9b1iwilFhO
+                BtaGSRwdsTjaQSQqMpz98kfI9FAH9Atv+wh8D7u3SWL4W/D+WKVQ6OmjW5V1PIIO3kU//hgj4J/9Ep8B
+                f+CWD/4mvxB+Ef7YvxS+BFitp4T8d+I9HsY+Us0uzJapzniF90Y684Xmut8Vf8FOPj14y0t7O8+JviCO
+                GRSrGzEVlJg9fnhRG7ev86AP0u/adT9kb9kW80608Y+B/AUWo6lKqrY2WgwXN1BEes8kajcsQ9erc7Qx
+                BFejfDf9lf8AZy+MHhK213wv4C+GWu6ReDMV1Z6VbyIfUHC5Vh3U4I7gV+Dmq6tda7qU95e3NxeXdy5k
+                mnnkMkkrHqzMckk+prtv2f8A9p3xz+y/4tGseCtfvNHnYr9ogU77a8UHO2WJsq4+oyM8EHmgD9pPjT/w
+                Td+E/jj4ReJtI0T4eeDdG1rUdMuINPvrbS4YpbS5MZ8qRWABGH2nr0zX4Sapplxomp3FndwyW91aStDN
+                FIMNE6khlI7EEEV+2H/BNX/gpLN+3JZajpep+FbvSPEGgW6TX17aDfpcwY7VwzHdHIx3ERndwrEMcHHx
+                t/wWu/YeuvhT8VpvinoFoz+F/F04OqCJPl03UD95mx0SbG7cf+WhcHG5QQD4Rr7d/wCCUn/BTuz/AGVE
+                n8DeOnuT4Iv5zcWd9EhlbRZm+/lBlmhfqdoJVskKdxx8RUUAf0h/Dv4s+GPi5okWo+F/EGj6/ZTJvWWw
+                u0nGPfaSQR0IOCDwa5D9oH9sv4bfsyaBPe+LfFWmWk8Slo9OhmWbULoj+GOBTvPOBkgKMjJA5r+euigD
+                7M1//gtp8U4/2kdT8XaNJDH4UuWSCDwvfDzrVLdM4O4YZZmyzM6nqQCGVVFd1+3x+298PP8AgoZ+xvBc
+                WDt4a8feDdQi1FtEv3Be5hcGGYW0uAswG9HI+V9sTEpgZr8+aKACiu2+Mn7OvjL4AR+H28XaHeaMPE+n
+                Jqen+euPNibsf7si5Xch+Zdy5AzXE0AfrP8A8Ey/+Ctfhvxn4A0zwP8AE7WLXQPE2jwpaWer38vl2mrx
+                KMJ5krcRzAAA7yA+AQckqPviyvodStUnt5Yp4JRuSSNgyuPUEcGv5oKuWXiG/wBNsZrW3vbyC2uMiWGO
+                ZlSXIwdyg4ORxzQB+7v7Xv8AwUY+HP7Inhu5Oo6vaa14m2EWug2E6y3Ur9vMxkQp6s+OAdoY8V+IPxv+
+                MuuftB/FfW/GPiOdbjV9duDPMUGEiGAqRoOyIgVVGScKMknmuUooAK9t/ZX/AGOdU/aV+FvxX8RWaXGz
+                wDoIv7YRoW+03XmCTygP4s28VzwOQxj9cHybwT4K1X4j+LtO0HQ7C41PV9WuEtbS1gXLzyMcADt9SeAM
+                kkAV+9P7Cv7JFh+x7+zjpnhAeRd6ncbrzW7lRlby7kAD4yBlFAWNcjlUBIyTQB+AVFfRP/BS/wDYzu/2
+                PP2iL62trZl8H+I5JL/QJwPkWIkF7b/ehZguOpUxt/FivnagD9PP+CSP/BUPw/onw+074W/EfVYNHn0j
+                /R9B1e7fZbS2/VbeaQnEbJ0RmwpXauQVG79JLS7iv7aOaCSOaGVQ6SRsGV1PIII4Ir+Z+un8IfGvxl8P
+                rD7LoHi3xNolrknydP1Se2jyeT8qMBQB/Qv8WPjL4W+BfhGfXfF2u6doGlwKSZruYJ5hAztRfvO57KoL
+                HsK/FL/gph+3bL+258Y4JtOjuLPwb4bSS20a3m4ebcR5ly47NJtT5f4VRR13Z8A8T+MNW8b6mb3WdU1H
+                V7wjBnvbl7iUj/eck1m0AFFFFAHvX/BQv4KzfCf4s+H9REe3TvGnhbSdatWCYXcbSKOZc9282N2PtIv1
+                Pgtfsj+2V+xZL+19/wAE9PAb6LbrL4y8I+H7K/0hQBuvFNpEJrUE/wDPQKpX/bjTJAJr8c7yzm067lt7
+                iKSCeBzHJHIpV42BwVIPIIPBBoA9K/Y8+Kvhb4PfHzR9V8b+GtL8V+EpS1pqllfWaXQSF8Dzo1YEeZGQ
+                rDuQGXjdmv2d+HH7Kf7Onxe8HWfiDwx4B+GeuaNfpvgu7TSreRG9QflyrDoVOCDwQDX4J11fws+OXjL4
+                Iao154Q8Ua74bnkIMh0+8eBZsdN6g7XHPRgaAP3d/wCGCPgn/wBEp8Bf+CWD/wCJri/jz8DP2Zf2afAF
+                z4k8Y+AvhzpOnwAiNX0e3M95IBkRQx7d0jn0H1OACR+Vsv8AwVT/AGgZrD7MfiXq3l4C5W1tVk4/2xFu
+                /HNeNfED4neI/ivrzap4n17V/EOosMfadRu5LmQDOdoLkkDnoOKAP2e/Zq8D/sp/taeGP7R8F+B/h3fS
+                RKGutPm0SCG+sie0kRXIGeNwypxwxr03/hgj4J/9Ep8Bf+CWD/4mvwM8FeOdZ+G/ie01rQNUvtG1axfz
+                Le7s5mhliPsynP1HQ96/TL/gnJ/wWJ8TfFrx7oXw68eaDceINX1aQWtlrOkwqJmIGS1zDwu0AMzSJgKA
+                SU6mgD9CvBvgvSfh34ZtNF0LTbPSNJsFKW1naRCKGBSSxCqOAMkn8a06KKACiiigAooooAKKKKACvyt/
+                4OGf+SqfDf8A7BV3/wCjkr9Uq5X4h/ArwR8Xbq2n8WeDfCvieezQx28mraTb3rQKTkhDIjFQSBkCgD+c
+                Wiv6F/8Ahiv4N/8ARJfhn/4S9j/8ao/4Yr+Df/RJfhn/AOEvY/8AxqgD+eiiv6F/+GK/g3/0SX4Z/wDh
+                L2P/AMao/wCGK/g3/wBEl+Gf/hL2P/xqgD+eivSfgn+x/wDE39om8hj8IeC9d1aCc8Xv2cw2S/71xJti
+                H03Zr94/C/7Mnw28D3Xn6L8PfA+kT5DeZZaFa27ZHQ5RAa7dFEagAAADAAHSgD87/wBjr/ghRpPg28tN
+                e+LeoW/iC9iKyx6DYMwsY2ByPPlOGm7ZRQq8EEuDX6E6TpNroGl29lY21vZWVpGsMFvBGI4oUUYVVUYC
+                gDgAcCrFFABVfVdKttd0u5sr23hu7O8iaC4gmQPHPGwKsjKeCpBIIPBBqxRQB+V37fH/AARN1Xw1ql54
+                p+DludT0eTMs/hoyE3dmc8/ZmY/vU6nYTvGMDfnA/PjXvD9/4V1i40/U7K707ULR/LntrqFoZoW9GRgC
+                p9iK/pYrifi7+zh4C+PVqIvGPhHQPEWxSkct5Zo88I9ElxvT/gLCgD+dGiv2r8Sf8ERfgHrs+610bX9G
+                XOdlnrMzL34/feYf17Vj6N/wQf8Aghpj5mufHGojzN+LjVIlAHHyfu4U+X9eetAH42V9F/sZ/wDBMv4i
+                ftg6nbXUFlL4a8IMwM2vahAyxOn/AE7ocGdsdNpCerCv1k+EP/BNP4IfBK8S60b4f6RPfRnct1qZfUZF
+                bsy+ezqh90Ar3RFEagAAADAAHSgDgv2bP2bPCv7KfwrsvCXhKy+zWNt+8nnkO64v5yBvmlf+J2wPQAAK
+                oCgAdV418FaT8R/CeoaFrun22q6RqsLW93aXCbo50PUEfyPUEAjkVqUUAfj5+3X/AMEZPFnwR1K88QfD
+                aC98YeEGJlNjGvmappa8kgoOZ0HZkG7nleNx+Ibm3ks7h4pUeKWJijo6lWRhwQQehFf0w15f8bf2LfhZ
+                +0WzyeMPBGh6reSDDXyxG3vT/wBt4isn4FsUAfz10V+zPiT/AIIU/A3XWm+y/wDCY6N5hG0WerK3lc5+
+                Xzo5Ppznj35rT8J/8ER/gJ4au1ludH1/XNpBEd/q8oQ49RD5eaAPxp8EeBNa+JXia10bw/pV/rOq3rBI
+                LSzgaaWQ+yqCcep6DvX6e/8ABOb/AII0D4bavp/jn4tRW13rNsyXGneHVYSwWMg5ElywyskgPRFyikZJ
+                bOF+5PhP8CPBnwK0hrHwd4Y0Tw5bycyiwtEiac+rsBuc8DliTxXW0Aed/tO/sv8AhP8Aa2+F1z4V8XWZ
+                mtZD5trdQ4W606YDCzQuQdrDPcEMCQQQSK/Gz9sn/gmL8R/2QtRu7yWwm8TeD4yWi17ToGaONP8Ap4jG
+                WgOOpbKZPDmv3XpHUSKQQCCMEEdaAP5nKK/e74w/8E0fgj8cLqS61jwDpVtfyEs13pRfTpWY/wATeSVV
+                z7uGryO+/wCCD3wRu9QimS58cW0aMxaCLVIjHID0BLQlsDthgfXNAH42133wA/Zi8c/tPeLE0jwV4evd
+                Ym3AT3CrstbMH+KWU/Ig+pyewJ4r9hvh3/wR3+Afw9u47g+EZteuI/utq+oTXCfjGGWM/ipr6P8ACnhD
+                SfAmgwaXommafo+mWq7IbSyt0t4IR6KiAKPwFAHzb/wTw/4JleH/ANijSDrGoTQeIfH19F5dzqQjxDYI
+                esNsDyAejOfmfHRR8tfUdFFAHnv7Tv7Mvhf9rP4TXvhHxVbPJaXBEttcwkLcafOAQk0Tc4YZPByCCQQQ
+                SK/Fj9sz/gnX8QP2NNfnbVLCXWPCrSEWmv2URa1dc4USjkwScj5X4JztZgM1+9NRXlnFqNpJBcRRzwTK
+                UkjkUMkinggg8EH0oA/mgor90/it/wAElvgP8Wb6W7m8FQ6HeSggy6JcSWCjPcRIfJB/4BXn9n/wQf8A
+                ghbahJM9x44uI3KlbeTVIhHHjqAVhDfN3yx9sUAfjZXuOsfsCeN/BX7Keo/FjxPaSeHNKjube206wvIW
+                S81DzZAplKHBjjAzgsMtwQNpDH9iPgd/wTu+Df7PF/De+G/A2ljVIH8yPUL8vf3UT9NyPMW8s4/ube/q
+                a9U8b/D/AEH4m6A+leJNE0jxBpcjrI9nqVnHd27MpypKSAqSD0OOKAP5sqK/oX/4Yr+Df/RJfhn/AOEv
+                Y/8Axqj/AIYr+Df/AESX4Z/+EvY//GqANn9nD/k3jwH/ANi7p/8A6TR18q/8FGP+CQ2mftL3134z8AtZ
+                aB45nYy31tMSllrbd2YjPlTH++Btc/eAJL19r6bptvo2nQWlpBDa2lrGsMEEKBI4UUAKqqOAoAAAHAAq
+                egD+cX4ufBHxd8BvFL6N4x8Pap4e1Fc4iu4SolA6tG/3ZF5+8hI965Wv6S/HPw80H4naC+l+I9F0rXtN
+                k5a11C0S5hJ9drgjPvXzr48/4I3/AAB8cXk1wnhK50Oecks2l6nPCgP+zGzNGv0VQOOlAH4fUV+yC/8A
+                BBr4JLqTT/bfHZiKbRbnVIfLU8fMD5G/P/Asc9K7z4df8EhfgF8Or2K6XwUNbuYcbX1e+mu0OPWIsImz
+                7oaAPx4/Z1/ZR8eftU+Kk0rwXoF3qWHC3F6ymOyshxkyzH5V4OcfePYE8V+x3/BPn/gnL4d/Ye8KSXLS
+                xa7441WIJqWseWVWNM5+z26nlIgcZP3nIBbACqv0H4d8Nad4Q0aDTtJ0+y0vT7ZdsNraQLBDEPRUUAAf
+                QVeoAKKKKACiiigAooooAKKKKACiiigAqG51CCzYCWaKInkB3C5/OvOfi3+2T8LfgTro0vxb458P6LqZ
+                UMbOW43ToD0LImWUHsWAzX5rf8F0fiRoHxY+Ifw21rwzrOm69pNzotwI7uxuFniYifkblJwR3B5Hes3P
+                WKWt3b8G/wBDSMLp30sr/il+p+uisHUEcg8gjvS1yvwjvItP+CXhieeWOCCHQ7SSSSRgqRqIEJJJ4AA7
+                1wU3/BRL4HW/iH+y2+KPhAXQfyywvgYAf+u3+r/Hdit6kOSo6a1aZhSnz01U7o9noqDTtSt9YsIbq0nh
+                urW4QSRTQuHjlUjIZWHBBHcVyHxg/aQ8B/AC2hk8Z+LND8OfaQTDHeXSpNOB1KR/fYD1ANQ9Ny1rsdtR
+                XB/B39p/4e/tAGZfBnjDQfEM1su+aC0ulM8S9NzRHDhc9yMV0njr4g6F8MPDc2seI9Y0zQtKtsebd39y
+                lvChPQFmIGT2HU0P3dZAtdEbFFeTfDz9uv4PfFXxLHo2g/ETwxfapO/lw232sRSXDf3Yw+3efZcmvWad
+                na4X1sFQTalb28vlvPCj/wB1nAP5V5b4/wD26/g/8LvFkmha98RPDGn6tA/lzWxug7W7f3ZNuQh9mIxX
+                5lf8FLvE2neMv+CnfhrVNIv7PVNNvl0SW2u7SZZoZ0LrhldSQR7g0qfv1KcFtJ2uE/dpzm94q9vu/wAz
+                9jqKivLyLT7SSeeWOCCFDJJJIwVI1AySSeAAO9eOzf8ABRL4HW/iH+y2+KPhAXQfyywvgYAf+u3+r/Hd
+                ijd26h0uez0VXsdUttU02K8triC4tJ4xLHPFIHjkQjIZWHBBHcVydt+0Z4BvILqSHxl4alSyiM85TUYm
+                8pAQu44bpkgfUgd6Ho7MFqro7SiuL8EftFeBviNNcx6N4o0i9ks4zNMgm2MkY+8+Gwdo7noKp6H+1R8O
+                vEniFNKsvGGiT30j+XGgnwJW6AKxwrE9sE57UdbB0uegUVzvjL4ueF/h3eRW+veIdH0aedPMijvbtIWk
+                XOMgMRkZrYs9as9Q0ePUILq3msJoRcJcJIGieMjcHDDgrjnNHS4dbFqiuZ8IfGXwl8QNTay0LxJomr3a
+                RmVobO8jmdUBALEKScZI59xXGeP/ANuv4P8Awu8WSaFr3xE8Mafq0D+XNbG6Dtbt/dk25CH2YjFHW3cP
+                M9Sm1K3t5fLeeFH/ALrOAfyrP8Y/EDQfh3YRXXiDW9I0O2nlEEc2oXkdtHJIeiBnIBY9h1r8iP8Agpd4
+                m07xl/wU78NappF/Z6ppt8uiS213aTLNDOhdcMrqSCPcGvp7/gtD+zPbfHa48C3knxJ8EeC7nT1uoY7L
+                xRqn2CC7RjGXlibDEuuFDDb0ZeRjBlNunGpbeTj6W/r5FWXtHC+0VL7/AOvmfd0UqzxK6Mro4DKynIYH
+                oQadXnv7KfgiD4Yfs0+CNDg16DxLbaXo1vFHq0L7ob1NgIkjOT+7wRt5+6BXP6n/AMFBPgno3ittFufi
+                b4Rj1BJPKdftymJHzghpR+7BB65bitakVGo6cXczptygps9iqB9St45/KaeES5A2FxuyfauMs/2n/hxq
+                HjqPwxB478JT+I5pRBHpkeqwtdO5G4KIw24nHOMdK/LP9q9xH/wXEsWYgAeLdAJJ6AbLSppLnrQpdJdf
+                u/zKlpSnU/lV7H7DUV49df8ABQL4KWXi06HL8TfCK6isvksv25fKV842mX/Vg54+9XrtrdR3ttHNDIks
+                Mqh0kRgyup5BBHBBpbrmWwbOz3JKK4j4wftJeAvgBbwv4z8W6H4cNyN0MV5dKs0wHBKR/fYe4BqP4O/t
+                PfD39oHzh4M8YaF4hltl3TQWl0pniXpuaM4cL7kYoWuwPTc7uivjb/gpz/wUwk/ZR0Ox0zwDqXg/V/Fs
+                t69rqdpczfaZ9JURhgzQpIpUnIxv49jXqH7BX7W2k/tHfBDwv9u8X+H9Z8fzaX9t1iwtbiEXVud+1i0C
+                coBuQdB1HrRT99OUen+V9PIJ+40pdf8AOx7zRXEfGD9pLwF8ALeF/Gfi3Q/DhuRuhivLpVmmA4JSP77D
+                3ANR/B39p74e/tA+cPBnjDQvEMtsu6aC0ulM8S9NzRnDhfcjFC12B6bnd0VznxO+Lvhf4LeGzq/i3X9J
+                8O6aG8sXF/crCrv1Crk5ZuDwMnjpXM/CL9sL4X/HrWG07wj448P63qKqX+xw3IW4ZR1ZY2wzAdyAQKFq
+                7IHors9Jooql4h8R6f4R0W51LVb6z0zTrNDJcXV1MsMMCjqzOxAA9yaG7asFd6Iu0V43oP8AwUJ+CXib
+                xImk2fxO8JSXsj+WiveiOORjwAsjYQknphue1exq4dAwIKkZBB4Ios7XC+thaK8g8X/t+/BfwJ4mk0fV
+                PiV4Ut9RhcxSxLeCXyXBwVdkyqkHqGIx3r07wp4v0rx54fttW0TU7DWNLvF3wXdlcLPBMvqrqSD+BoWq
+                5lsD0dnuaNFeff8ADWPww/4Sm60P/hYXgwaxYtMlzZHWIBPbmEMZQ6bsrsCMWz02nPSs34c/tufCX4t+
+                MBoHhz4geGtV1h8+XaxXQDz45Pl7sCTgE/KTwCelC12B6bnqdFeP3v8AwUA+CuneMG0Gb4meEk1JJfIZ
+                DfL5SPnBUy/6sHPHLcGvXoZkuIVkjZXRwGVlOQwPQg0LVcy2B6Oz3HUUUUAFFFFABRRRQAUUUUAFeXft
+                qfGu4/Z2/ZY8beMLLb9v0jTm+xlhlVuJGWKIkdwHdTj2r1GuE/ab+C0P7RXwB8V+CppRb/8ACQafJbRT
+                MMiGX70bkdwrqpP0rHEKTpSUd7GtBxVWLltdH5Qf8E5/+Cdbf8FDbvxT4y8a+KNYtdNtb7yZprcrJfal
+                duPMdmkkDAABlJJUkl+2K85/4KM/sQf8MN/GSy0S01aXWtE1qz+3afPOgSdAHKPHIF4LAgfMAAQw4GDX
+                V/s+ftX/ABT/AOCTHxB8SeEdW8LwSxX0okudN1IPGjyJlVuLeVeCrDjIDKwA6EV51+21+0z46/a48e6Z
+                408YaX/Y9hd2rW+h28MLx2wt0c7jGz8yHex3P3PHGMDWbi5U3Q+HS/3f57eREOZc6rfF0+//AC/E+rf+
+                Cxn7SeseH/g58K/hnpl3LZ6fq3hu11bVxGxU3abFjhiY/wBwMkjEdyF9K8J0n4U/srS/A1Bd/FHxpH8Q
+                5LIStImjyHTYbrZnyvL8je0Ybgt5mTjIx92vqv8A4Kk/sReIvj7+zx8NvHfhDT59Y1bwv4ft7TUNPt0L
+                3FxatEjq8ajlijbsqMkh8jpXyL4S/bP8D+C/htHoWsfs8/D7VfFWnwfZW1a5MkO+RRtDzW4XJfj5sOuT
+                ngdKdT460X8XM/W13a3Ta39XJpfw6Mo/Dyr0vZXv87/L5H0J/wAEU/2wtR8E+C/iP4T1i5mv9F8K6FP4
+                p06KRyfsqw/6+NM9FbcjY6A7j/Ea8b/ZI/Zs8R/8FZf2lfFWt+LvE1xZQWqC+1S8RPNlHmMVhtoFY4RQ
+                FbHUKqdDmvuv/gmn8OdF+LXwH1bWtT+Cuk/DG+8QWEmjTXdlGYV1y0lX53jif95GhOPvZBwCrEdPhXTt
+                R+LX/BGj9pDVni0qK70vUQ1pHNeW7tp2u2wbdG6upG2QYzgHKkkEEHnSo4rEr238tk/PX9OXz09SIKTw
+                79l/Nd+mn6833ryPqT4U/wDBDnUPg5+0zpXibQ/ibf6f4c0Z47y3mggCau0oJ3Qk/wCq8sjGWIO4MVMe
+                OT4J+3P4q8Uf8FAv+CkqfCyy1P7FpGk6q2g6dFISYLUxAm5uWQY3PlZD6kKq5HWvRf2Wf+Cmv7Rf7Vv7
+                Ulknhvw7o154ck8u31DTFtHXT9Oh3EtcSXRy6SYJxyQ2ABGTWB/wU1/Zh8e/softcH46eBrW5n0i7vk1
+                dru3gMy6TeADzVnX/nlIQTuPyneykg4zn8M6LrfBr9+mr+V7fduWtY1VS+Oy+7XT79X/AJFX9uv/AII1
+                2X7Ln7P91478L+LNT1htAMTanbX0CIXR3VPNhZPu7WYEq2eMndxg9V4U/wCCjniyP/gkNq18+pXX/CZ6
+                bqyeDrfVTITcGOSMSrMW6+YIBIgbOcqGzmvHP2h/+CnfxX/b88DWnw00/wAL2EH9ryxfa7XQ7eae51R0
+                YMqgMWKRhgGIGT8oy2Mg/Vvhz/glTq1l/wAEu9S+HczW48f6neDxMU8wGKK9UKEtt/T/AFS+WW6bnJzi
+                pkp+wq83wtq33q9v+3eb7/NFQcPa0rfEr3+52v8A9vW/pM8A/wCCdn/BI7TP2vfg1J478YeJdY0y01G5
+                mg06300R+bJ5bFXlkeRWGC4YBQM/KTu5rw/4zfsxXP7IP7deleCJ9QGqwWWsafcWd5s2GeCSVGQsuTtY
+                ZIIz1BI4Nd9+y5/wUm+JX/BOvQtU+HWqeE7a8hsrt5V0/VlltbnTZm++AR1RiN2COpJBwa80+IPxW8af
+                HL9szw94v8d2clhrPiDU9Ouobc27QRx2vmosIiRst5e1eCSd3XJzmumk08XSlS+G6/T8d36XOerdYaqq
+                vxWf9eltPU+zP+C+v7SeseHx4Y+GemXctnp+rWjatq4jYqbtPMMcMTH+4GSRiO5C+lfMmk/Cn9laX4Go
+                Lv4o+NI/iHJZCVpE0eQ6bDdbM+V5fkb2jDcFvMycZGPu19of8Fsf2IvEXx98NaF478IafPrGreF4JLTU
+                NPt0L3Fxas29XjUcsUbdlRkkPkdK+IPCX7Z/gfwX8No9C1j9nn4far4q0+D7K2rXJkh3yKNoea3C5L8f
+                Nh1yc8DpXDR/hzi/iv8AO2trdNrf1c7avxwlH4bfK/W/zv8AL5H0x/wQa/aN1fUz4w+GWoXct3pllpza
+                zpSyMW+x4cRzRrnojGRGx0BDH+I1X/ZJ+ANv+0b8YJNDvr25sdPgtZby5e32+a6qyqFUsCASzjkg9Olf
+                Qv8AwS40DT/Enwfu/GcvwX0n4Xa3dWxslvbOJoV1uAgOZI4n/eRx7lX7xIOAVYjp59/wS4/5OL1j/sCT
+                /wDo+Cu5pPEWluo6/Lmt+Fv1OOOlFuOzl/lf8bnmnx5+Ay/CX9oqbwVpd/PcxTTW8NvPNgSbZ1XAfbgH
+                G7BwBn0ruP2z/wBjbSv2Z/CugalpWrajftfzNa3K3QT74TdvTaBtHB4OT05q7+1//wApAbP/AK/NL/lF
+                Xq//AAVh/wCSXeF/+wq//olq5LtYeM+vNb8V/mdNl7Zx6cqf4NnOfHTwTefHT9gPwh4vn3XWueG7USyy
+                nl5rcMYpMnucIjk/7LetUPhv+05/Z/8AwTw1+we4xrGkt/YUGW+cx3GShH0Qygf9c69//Y30m31/9j7w
+                xY3cazWt5p80E0bDh0aSRWB+oJr8+Pip8NNR+G3xZ1jwWjTTNBqIgijVuLnJPksR0LFZB9NxrWsm61Si
+                vtP9dfw/NmVB/uqdV7x/y0/H8kdJfeNdU/ZY/wCCfnjTx9pUslj4g8Z6hD4Z0q7Q4ktYvmaaRD1DELIA
+                ezID2ri/+Cdn/BI7TP2vfg1J478YeJdY0y01G5mg06300R+bJ5bFXlkeRWGC4YBQM/KTu5r7g/aw/Yff
+                4v8A7An/AArXRzCutaLbQXenFiFSa8iyzAnoPM3SLk9C4Pavzt/Zc/4KTfEr/gnXoWqfDrVPCdteQ2V2
+                8q6fqyy2tzpszffAI6oxG7BHUkg4NClD2tWMt9FH0Vv1u/n5obUnSpuO125erv8Apyr5PzOB+M37MVz+
+                yD+3XpXgifUBqsFlrGn3FnebNhngklRkLLk7WGSCM9QSODX1h/wcR/8AH58Kf9zU/wCdrXyF8Qfit40+
+                OX7Znh7xf47s5LDWfEGp6ddQ25t2gjjtfNRYREjZby9q8Ek7uuTnNfXv/BxH/wAfnwp/3NT/AJ2tZz5l
+                h6Knvzy/Jfj38zSlyvE1HDbkX6/h2Lf7fH7Rmr/CD/glr8FfDOiXc1hc+OtAsbe7niYq5s4rOIyxgjkb
+                2kjB9V3DvXOfsef8ERdF+Of7OWkeMPFXizWtM1TxNaC9sLbT4ovJtIn/ANWZd4JkJGGIUpjOM969Q/am
+                /Y/1f9qv/glt8I5/DNu174l8IeHtPv7azX797C1nGs0Sf7eArAd9mByRXzP+zn/wWD+JX7LXwog+HU3h
+                bStYuNB3WWntqKTQ3VlycQyRqQX2scAfK2OM10VuX6xiIy+Jy09PL+u5hT5vYUHH4VHX18/l+hyX7Ivw
+                lvfgP/wVV8K+DtRmjubzw54oaxeaP7kwVX2uB2DLg47ZxV3/AIKbeDr34h/8FSfEugacVXUNb1LTLC2Z
+                jhVkltrZFJPYZYVn/sd654m8T/8ABUvwhqfjKK6g8T6l4k+16jHcQmGRJZEZyCh5TAIwvYYFaH/BTZdZ
+                f/gqT4lHhxbh/EH9paYdMW3XMrXP2W28oIO7b9uPesqW2H9rr8V7dfgvY0l8Vf2WmkbffKx778d/+CD2
+                j/Dv9nnVtd0LxnrF/wCKtB06S/njuoIlsr7ykLukaqN8ZIB2ku3OM9cjT/4Itftfalpv7PXxJ0LXZ5b+
+                w+G+nHXNO8xyzxW2yVpIAf7gaMFR28w+1eOfGv8A4LRfFT4p/CTUfh/P4Y0fRNa1SBtK1O8gimF04YGO
+                REhY/u5GyVP3iMnABxj6e/4JDfsG6n8Kv2fPF+oeOLCfTb/4l2wsv7PmUpPa2AR1G9TyruZWO08gBc4J
+                IAvaOFZxejjp/i6W/D5XE/Z3pKS95S19NL3+V/m0fnz8PPGng79p/wDaH1rxT8ffG2u6TY3wa5eTTbV7
+                i4uZCwCQR/I6xRovTKnhQAOciT4u+JPAP7OPx08P+Kv2fvHHiLUobJvtOdStXgubGVWGY2bZGssTqSMb
+                egYNnNbfiv4Pa1/wTb/aEvLf4gfDfSfHnhuQvb2rapA4stTizlJYJ1BCSgDleSMsCvQ16V+z38e/Cv7R
+                37QmlaH4e/ZU8E6jol0FiurOz8yS6tctzcNcsFiRFHZ0APTcCaqh73s/YaW/4O9/6XXqFa8ef22t/wCt
+                P69OhX/4Ku/s+6bb6R4X+OVnq11PP8YGiv5dOeFVjsQ1nE4CuDlvTkV9Ff8ABMT9kbSP2XPgU37QH9u3
+                2oXGp+Dbq5udMe3VIoEUiY7XByf9QByP4jW3/wAFsf2cdX8WfsreED4O0Oe60/wNehZbCwhMjWloYPLV
+                lUZJRNqg4HAOTwCa4n/gkP8Ateav+0R4cufgNr2i6XFoGi+FLqIXsHmLczRmRItjgkrnbO3IA6Diohdx
+                r08No1fl8o8j0CSSdGdfWLtzecuZHxf8PPGng79p/wDaH1rxT8ffG2u6TY3wa5eTTbV7i4uZCwCQR/I6
+                xRovTKnhQAOciT4u+JPAP7OPx08P+Kv2fvHHiLUobJvtOdStXgubGVWGY2bZGssTqSMbegYNnNbfiv4P
+                a1/wTb/aEvLf4gfDfSfHnhuQvb2rapA4stTizlJYJ1BCSgDleSMsCvQ16V+z38e/Cv7R37QmlaH4e/ZU
+                8E6jol0FiurOz8yS6tctzcNcsFiRFHZ0APTcCauh73s/YaW/4O9/6XXqFa8ef22t/wCtP69OhD/wWY8X
+                +Ifij8QPhr4vu4L5fBfiLwnZ32lhSfs8c0oMlwgP3RLho899oT0rS/Yq+Ev7MfxH/aJ8M32kfED4heFN
+                Qtmhez0TWfKtp7m+VuNl/CNgVjjCYV2JOCM7a9y/4KiftWePP2Wtb8O+EbL4ZeGLn4SW0VuqvqFl/aFn
+                qsaKFNm25dlvtAKgYLkBWDYytfCGtaef2z/2j9Ng+E/wzTwdcX/lJ/Zml3Ut1DBIH+a6ZyqiFACucBVX
+                bnqaeElF1f3S0c5W7q7v+H/BstxYiL9l+8evKr9nt/T+7yP36HAr8nv+C0nxr8S/GX9rDRfg3pFy8el2
+                Bs4vsgcpHeahdbSjyeoVZIwuemXPevUP+Cq/7fPxf/ZM+L/hLw34Qmi0zSn0uK7lvpdOjuv7Zn3skkW6
+                RWAVdqZCbX/eZzyK88/4Khfss/EDx1H4I/aA0LQdQh1W+0SwuPEdhZxM9zol5HGrrLs5bYMhTxlDGM9e
+                MPdk41ZfAp2f46+mn32NIuSUqa0nKF1+H6P8zovGH/BvYIvh7af2D8QGm8VKY/tQv7MR6fICQJNmzMi7
+                QSRnduwB8ucjS/4KGa54j/4J7fsCeEPhVpnjLWdc1HxJPNaT6tPiKWGyjVWkt4cZZIyXRQCzEIWXOMAe
+                La5/wXA+NvxB8Iad4d0TTtC0/wARSSRIdS06xee7vGUjCpC5dAXxhgFOcnAWvpb9rL9mL4rft5/sC+HN
+                V8U+H9P0f4q+HZn1KDSrZihvLdl2tGysT5UzqFfZuOCgX5SSFrEKfsZW+HmV/NeXl362v0JoOKqx5vis
+                7eTt1+fXY8Z/ZI/4Ih2Px3/Zv0rxh4h8ZahpGreJrT7bp1tZ2qSQWsTf6sy7uXLDDEKVxnGT1rG/4JT/
+                ABP8Ufsn/t6al8G9Vu2uNK1W+u9Ju7dXJgjvIFcpcRg9NwjKnplXGfujHJ/A7/grh8V/2Q/hV/wre78O
+                aVc3Hh9WtbFtYtp4bvTBkkRyIGXeFzwCFIHBJGK9X/4JDfsf+NPiT+0RP8dfHVreWlqslze2Mt5EYpdY
+                vLgMHmVMD90okc7sYLFQucHHVTd8Q5w/h2f/AAPn+tmYT0w/JP8AiXVv1+W3yufPEXwBH7UP/BUnxJ4G
+                kv5tMt9c8YastxcxKGkjhjlnlk2g8biqEDPGT0PSk/4KX/sX6V+wv8bdG0fwzrOrahp+q6auoQvfMn2q
+                2cSOhBeNVU/dBBCjGfbNelfsif8AKcK+/wCxq8Qf+i7yt7/g4I/5ON8Ef9i8f/SmSuKC5aGFS+1v9z/y
+                O+p72JxF+m3/AIEYP7YP/BKXQv2Z/wBiXSPiLbeJNYvfEf8AoR1O2nWL7G/2gAFYQqh12Mw5Zm3AHgZr
+                7U/4ItfEHU/H37CujrqlxJdNoeoXOl2zyNuYQIVZFJ9FD7R6BQO1YP8AwVs/5Rf/AI6R/wChx0//AIIT
+                /wDJjh/7GG9/9Bhrspu88TDonp5fD/m/vPNl/Dw8+rWv3S/yR9mUUUVgdIUUUUAFFFFABRRRQAUUUUAU
+                tY8O6f4ijRdQsbO+WNtyC4gWUIfUbgcGrccawxqiKFVRhVAwAPQU6igArOuvB+k3uqLfTaXp0t6hytw9
+                sjSr9GIz+taNFABUGpaXbazZtb3dvBdQP96KaMOjfUHip6KAK+l6Ra6HZrb2Vrb2kC/digjEaD6AACp2
+                G4YPIPBB70tFAFHSfDGm6DNLJY6fY2bznMjQQLGZD7kAZq9RRQBR1PwxputXUU95p9jdz2/MUk0CyNH/
+                ALpIyPwq9RRQAVnXXg/Sb3VFvptL06W9Q5W4e2RpV+jEZ/WtGigAooooAKKKKAPNP2s9b8Y6B8GLy48C
+                Jev4h8+FYhaWq3Muwth8IysOnfHFfPv7IH7GHim/+Ki+PfiJFPBLbTm8gt7tw9zeXB5EsgydoU8gHkkD
+                gAc/ZtFFP3JOS3/IJ+9Hl6fmFUdT8MabrV1FPeafY3c9vzFJNAsjR/7pIyPwq9RQAUUUUAFUZvDGm3Gr
+                LfyafYvfRjC3LQKZV+j4z+tXqKACiiigCi/hjTZNYGoNp9ib8DAuTAvnAf7+M/rV6iigCG/0631W0aC6
+                ghuYH4aOVA6N9QeKi0fQLHw7a+Tp9laWMOc+XbwrEufooAq3RQAUyO3jikZ1RFaT7zBcFvrT6KAIb/Tr
+                fVbRoLqCG5gfho5UDo31B4qLR9AsfDtr5On2VpYw5z5dvCsS5+igCrdFAEd1axX1u8U0cc0UgwyOoZWH
+                oQeKraL4c0/w5AY9PsLOwjY5KW0CxKT9FAq7RQBW1DR7TVmhN1a29ybdxLEZYg/lOOjLkcH3FWaKKAM+
+                z8K6Xp2pyXtvpthBeS/fnjt0WV/qwGTWhRRQBQ1Hwvpmr30Vzd6dY3VzB/q5ZrdHeP6MRkVfoooAKKKK
+                ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK
+                ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK
+                ACiiigAooooA/9k=
+</property>
+        </structure>
+    </list-property>
 </report>
