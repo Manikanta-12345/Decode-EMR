@@ -212,6 +212,7 @@ public class DecodeEmrMasterController {
 		}
 		patient.getEpisodes().parallelStream().forEach(ep -> {
 			ep.setPatient(patient);
+			ep.setStatus("Active");
 			setDiseaseHistory(ep);
 			setSeverity(ep);
 			setEyeHealth(ep);

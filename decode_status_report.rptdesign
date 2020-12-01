@@ -67,8 +67,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/decode-emr</property>
-            <property name="odaUser">root</property>
+            <property name="odaURL">jdbc:mysql://decode-emr.cq1i5nbej9gt.ap-south-1.rds.amazonaws.com:3306/decode-emr</property>
+            <property name="odaUser">admin</property>
+             <encrypted-property name="odaPassword" encryptionID="base64">YWRtaW5fZGVjb2Rl</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
