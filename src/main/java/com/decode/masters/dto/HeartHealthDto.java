@@ -100,6 +100,12 @@ public class HeartHealthDto {
 	public void setHdlCholestrol(String hdlCholestrol) {
 		this.hdlCholestrol = hdlCholestrol;
 	}
+	public List<String> getSuggestedInterventionForheart() {
+		return suggestedInterventionForheart;
+	}
+	public void setSuggestedInterventionForheart(List<String> suggestedInterventionForheart) {
+		this.suggestedInterventionForheart = suggestedInterventionForheart;
+	}
 	public String getHdlRatio() {
 		return hdlRatio;
 	}

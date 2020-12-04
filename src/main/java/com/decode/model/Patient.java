@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -31,7 +33,7 @@ public class Patient {
 	private String middleName;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column(name = "date_of_name")
+	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	@Column(name = "age")
 	private int years;
@@ -59,8 +61,9 @@ public class Patient {
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
 	@OneToOne(mappedBy = "patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	private Address patientAddress;
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
 	@JoinColumn(name = "patient_id")
 	private Set<Episode> episodes;
 	
