@@ -60,4 +60,9 @@ public class Address {
 		this.location = location;
 	}
 
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", address=" + address + ", location=" + location + ", patient=" + patient + "]";
+	}
+
 }

@@ -221,174 +221,180 @@ public class DecodeEmrMasterController {
 		Episode episode = emrDao.getEpisode(episodeId);
 		List<EpisodeDto> episodes = new ArrayList<>();
 		PatientDto response = new PatientDto();
+
 		episodes.add(getEpisodeDto(episode));
 		response.setEpisodes(episodes);
 		return new ResponseEntity<PatientDto>(response, HttpStatus.OK);
 	}
 
 	public EpisodeDto getEpisodeDto(Episode episode) {
-		EpisodeDto episodeDto = new EpisodeDto();
+		if (episode != null) {
+			EpisodeDto episodeDto = new EpisodeDto();
 
-		episodeDto.setCreatedUser(episode.getCreatedUser());
-		episodeDto.setCreatedDate(episode.getCreatedDate());
-		episodeDto.setEpisodeId(episode.getEpisodeId());
-		episodeDto.setOrgId(episode.getOrgId());
-		episodeDto.setLocationId(episode.getLocationId());
-		if (episode.getDiseaseHistory() != null) {
-			DiseaseHistoryDto history = new DiseaseHistoryDto();
-			history.setComorBidities(episode.getDiseaseHistory().getComorBidities() != null
-					? Arrays.asList(episode.getDiseaseHistory().getComorBidities().split(","))
-					: null);
-			history.setDiseaseName(episode.getDiseaseHistory().getDiseaseName());
-			history.setDiseaseType(episode.getDiseaseHistory().getDiseaseType());
-			history.setDuration(episode.getDiseaseHistory().getDuration());
-			history.setId(episode.getDiseaseHistory().getId());
-			history.setLsm(episode.getDiseaseHistory().getLsm());
-			history.setMedication(episode.getDiseaseHistory().getMedication());
-			history.setTypeOfOralMedication(episode.getDiseaseHistory().getTypeOfOralMedication());
-			history.setCreatedDate(episode.getDiseaseHistory().getCreatedDate());
-			history.setCreateduser(episode.getDiseaseHistory().getCreateduser());
-			episodeDto.setDiseaseHistory(history);
+			episodeDto.setCreatedUser(episode.getCreatedUser());
+			episodeDto.setCreatedDate(episode.getCreatedDate());
+			episodeDto.setEpisodeId(episode.getEpisodeId());
+			episodeDto.setOrgId(episode.getOrgId());
+			episodeDto.setLocationId(episode.getLocationId());
+			if (episode.getDiseaseHistory() != null) {
+				DiseaseHistoryDto history = new DiseaseHistoryDto();
+				history.setComorBidities(episode.getDiseaseHistory().getComorBidities() != null
+						? Arrays.asList(episode.getDiseaseHistory().getComorBidities().split(","))
+						: null);
+				history.setDiseaseName(episode.getDiseaseHistory().getDiseaseName());
+				history.setDiseaseType(episode.getDiseaseHistory().getDiseaseType());
+				history.setDuration(episode.getDiseaseHistory().getDuration());
+				history.setId(episode.getDiseaseHistory().getId());
+				history.setLsm(episode.getDiseaseHistory().getLsm());
+				history.setMedication(episode.getDiseaseHistory().getMedication());
+				history.setTypeOfOralMedication(episode.getDiseaseHistory().getTypeOfOralMedication());
+				history.setCreatedDate(episode.getDiseaseHistory().getCreatedDate());
+				history.setCreateduser(episode.getDiseaseHistory().getCreateduser());
+				episodeDto.setDiseaseHistory(history);
 
-		}
-		if (episode.getDiseaseSeverity() != null) {
-			DiseaseSeverityAndControlStatusDto severity = new DiseaseSeverityAndControlStatusDto();
-			severity.setCreatedDate(episode.getDiseaseSeverity().getCreatedDate());
-			severity.setCreateduser(episode.getDiseaseSeverity().getCreateduser());
-			severity.setBloodSugarLevels(episode.getDiseaseSeverity().getBloodSugarLevels());
-			severity.setHbA1c(episode.getDiseaseSeverity().getHbA1c());
-			severity.setId(episode.getDiseaseSeverity().getId());
-			severity.setSuggestedHba1cMonitoring(episode.getDiseaseSeverity().getSuggestedHba1cMonitoring());
-			severity.setSuggestedPlasma(episode.getDiseaseSeverity().getSuggestedPlasma());
-			severity.setSuggestedInterventionForDisease(
-					episode.getDiseaseSeverity().getSuggestedInterventionForDisease() != null
-							? Arrays.asList(
-									episode.getDiseaseSeverity().getSuggestedInterventionForDisease().split(","))
-							: null);
-			episodeDto.setDiseaseSeverity(severity);
-		}
-		if (episode.getFamilyHistory() != null) {
-			FamilyHistoryDto family = new FamilyHistoryDto();
-			family.setAlcoholConsumption(episode.getFamilyHistory().getAlcoholConsumption());
-			family.setCreatedDate(episode.getFamilyHistory().getCreatedDate());
-			family.setCreateduser(episode.getFamilyHistory().getCreateduser());
-			family.setEmotionalStress(episode.getFamilyHistory().getEmotionalStress());
-			family.setHabitualPattern(episode.getFamilyHistory().getHabitualPattern());
-			family.setHistoryOfSmoking(episode.getFamilyHistory().getHistoryOfSmoking());
-			family.setRelation(episode.getFamilyHistory().getRelation());
-			family.setId(episode.getFamilyHistory().getId());
-			family.setSleep(episode.getFamilyHistory().getSleep());
-			episodeDto.setFamilyHistory(family);
-		}
-		if (episode.getHeartHealth() != null) {
-			HeartHealthDto heart = new HeartHealthDto();
-			heart.setBloodPressure(episode.getHeartHealth().getBloodPressure());
-			heart.setBmi(episode.getHeartHealth().getBmi());
-			heart.setCreatedDate(episode.getHeartHealth().getCreatedDate());
-			heart.setCreateduser(episode.getHeartHealth().getCreateduser());
-			heart.setHdlCholestrol(episode.getHeartHealth().getHdlCholestrol());
-			heart.setHdlRatio(episode.getHeartHealth().getHdlRatio());
-			heart.setHeight(episode.getHeartHealth().getHeight());
-			heart.setLdlCholestrol(episode.getHeartHealth().getLdlCholestrol());
-			heart.setWeight(episode.getHeartHealth().getWeight());
-			heart.setId(episode.getHeartHealth().getId());
-			heart.setVldlCholestrol(episode.getHeartHealth().getVldlCholestrol());
-			heart.setLdlCholestrol(episode.getHeartHealth().getLdlCholestrol());
-			heart.setTriglycerides(episode.getHeartHealth().getTriglycerides());
-			heart.setTotalCholestrol(episode.getHeartHealth().getTotalCholestrol());
-			heart.setSuggestedCholestrolMonitoring(episode.getHeartHealth().getSuggestedCholestrolMonitoring());
-			heart.setSuggestePressureMonitoring(episode.getHeartHealth().getSuggestePressureMonitoring());
-			heart.setSuggestedInterventionForheart(episode.getHeartHealth().getSuggestedInterventionForheart() != null
-					? Arrays.asList(episode.getHeartHealth().getSuggestedInterventionForheart().split(","))
-					: null);
-			episodeDto.setHeartHealth(heart);
+			}
+			if (episode.getDiseaseSeverity() != null) {
+				DiseaseSeverityAndControlStatusDto severity = new DiseaseSeverityAndControlStatusDto();
+				severity.setCreatedDate(episode.getDiseaseSeverity().getCreatedDate());
+				severity.setCreateduser(episode.getDiseaseSeverity().getCreateduser());
+				severity.setBloodSugarLevels(episode.getDiseaseSeverity().getBloodSugarLevels());
+				severity.setHbA1c(episode.getDiseaseSeverity().getHbA1c());
+				severity.setId(episode.getDiseaseSeverity().getId());
+				severity.setSuggestedHba1cMonitoring(episode.getDiseaseSeverity().getSuggestedHba1cMonitoring());
+				severity.setSuggestedPlasma(episode.getDiseaseSeverity().getSuggestedPlasma());
+				severity.setSuggestedInterventionForDisease(
+						episode.getDiseaseSeverity().getSuggestedInterventionForDisease() != null
+								? Arrays.asList(
+										episode.getDiseaseSeverity().getSuggestedInterventionForDisease().split(","))
+								: null);
+				episodeDto.setDiseaseSeverity(severity);
+			}
+			if (episode.getFamilyHistory() != null) {
+				FamilyHistoryDto family = new FamilyHistoryDto();
+				family.setAlcoholConsumption(episode.getFamilyHistory().getAlcoholConsumption());
+				family.setCreatedDate(episode.getFamilyHistory().getCreatedDate());
+				family.setCreateduser(episode.getFamilyHistory().getCreateduser());
+				family.setEmotionalStress(episode.getFamilyHistory().getEmotionalStress());
+				family.setHabitualPattern(episode.getFamilyHistory().getHabitualPattern());
+				family.setHistoryOfSmoking(episode.getFamilyHistory().getHistoryOfSmoking());
+				family.setRelation(episode.getFamilyHistory().getRelation());
+				family.setId(episode.getFamilyHistory().getId());
+				family.setSleep(episode.getFamilyHistory().getSleep());
+				episodeDto.setFamilyHistory(family);
+			}
+			if (episode.getHeartHealth() != null) {
+				HeartHealthDto heart = new HeartHealthDto();
+				heart.setBloodPressure(episode.getHeartHealth().getBloodPressure());
+				heart.setBmi(episode.getHeartHealth().getBmi());
+				heart.setCreatedDate(episode.getHeartHealth().getCreatedDate());
+				heart.setCreateduser(episode.getHeartHealth().getCreateduser());
+				heart.setHdlCholestrol(episode.getHeartHealth().getHdlCholestrol());
+				heart.setHdlRatio(episode.getHeartHealth().getHdlRatio());
+				heart.setHeight(episode.getHeartHealth().getHeight());
+				heart.setLdlCholestrol(episode.getHeartHealth().getLdlCholestrol());
+				heart.setWeight(episode.getHeartHealth().getWeight());
+				heart.setId(episode.getHeartHealth().getId());
+				heart.setVldlCholestrol(episode.getHeartHealth().getVldlCholestrol());
+				heart.setLdlCholestrol(episode.getHeartHealth().getLdlCholestrol());
+				heart.setTriglycerides(episode.getHeartHealth().getTriglycerides());
+				heart.setTotalCholestrol(episode.getHeartHealth().getTotalCholestrol());
+				heart.setSuggestedCholestrolMonitoring(episode.getHeartHealth().getSuggestedCholestrolMonitoring());
+				heart.setSuggestePressureMonitoring(episode.getHeartHealth().getSuggestePressureMonitoring());
+				heart.setSuggestedInterventionForheart(
+						episode.getHeartHealth().getSuggestedInterventionForheart() != null
+								? Arrays.asList(episode.getHeartHealth().getSuggestedInterventionForheart().split(","))
+								: null);
+				episodeDto.setHeartHealth(heart);
 
-		}
-		if (episode.getKidneyHealth() != null) {
-			KidneyHealthDto kidney = new KidneyHealthDto();
-			KidneyHealth kidneyModel = episode.getKidneyHealth();
-			kidney.setBloodUrea(kidneyModel.getBloodUrea());
-			kidney.setCreatedDate(kidneyModel.getCreatedDate());
-			kidney.setCreateduser(kidneyModel.getCreateduser());
-			kidney.setId(kidneyModel.getId());
-			kidney.setMicroAlbumin(kidneyModel.getMicroAlbumin());
-			kidney.setProtien(kidneyModel.getProtien());
-			kidney.setSerumCreatinine(kidneyModel.getSerumCreatinine());
-			kidney.setSugar(kidneyModel.getSugar());
-			kidney.setSuggestedKidneyMonitoring(kidneyModel.getSuggestedKidneyMonitoring());
-			kidney.setSuggestedInterventionForKidney(kidneyModel.getSuggestedInterventionForKidney() != null
-					? Arrays.asList(kidneyModel.getSuggestedInterventionForKidney().split(","))
-					: null);
-			episodeDto.setKidneyHealth(kidney);
-		}
-		if (episode.getEyeHealth() != null) {
-			EyeHealthDto eye = new EyeHealthDto();
-			EyeHealth eyeModel = episode.getEyeHealth();
-			eye.setCreatedDate(eyeModel.getCreatedDate());
-			eye.setCreateduser(eyeModel.getCreateduser());
-			eye.setId(eyeModel.getId());
-			eye.setLeftEyeNotes(eyeModel.getLeftEyeNotes());
-			eye.setRightEyeNotes(eyeModel.getRightEyeNotes());
-			eye.setSuggestedDilatedEyeExamination(eyeModel.getSuggestedDilatedEyeExamination() != null
-					? Arrays.asList(eyeModel.getSuggestedDilatedEyeExamination().split(","))
-					: null);
-			eye.setSuggestedInterventionForEye(eyeModel.getSuggestedInterventionForEye() != null
-					? Arrays.asList(eyeModel.getSuggestedInterventionForEye().split(","))
-					: null);
-			episodeDto.setEyeHealth(eye);
-		}
-		if (episode.getFeetHealth() != null) {
-			FeetHealthDto feet = new FeetHealthDto();
-			FeetHealth feetModel = episode.getFeetHealth();
-			feet.setCreatedDate(feetModel.getCreatedDate());
-			feet.setCreateduser(feetModel.getCreateduser());
-			feet.setId(feetModel.getId());
-			feet.setLeftFeetCondition(feetModel.getLeftFeetCondition());
-			feet.setRightFeetCondition(feetModel.getRightFeetCondition());
-			feet.setLeftFeetCounter(feetModel.getLeftFeetCounter());
-			feet.setRightFeetCounter(feetModel.getRightFeetCounter());
-			// observation
-			feet.setLeftFeetObservation(feetModel.getLeftFeetObservation() != null
-					? Arrays.asList(feetModel.getLeftFeetObservation().split(","))
-					: null);
-			feet.setRightFeetObservation(feetModel.getRightFeetObservation() != null
-					? Arrays.asList(feetModel.getRightFeetObservation().split(","))
-					: null);
+			}
+			if (episode.getKidneyHealth() != null) {
+				KidneyHealthDto kidney = new KidneyHealthDto();
+				KidneyHealth kidneyModel = episode.getKidneyHealth();
+				kidney.setBloodUrea(kidneyModel.getBloodUrea());
+				kidney.setCreatedDate(kidneyModel.getCreatedDate());
+				kidney.setCreateduser(kidneyModel.getCreateduser());
+				kidney.setId(kidneyModel.getId());
+				kidney.setMicroAlbumin(kidneyModel.getMicroAlbumin());
+				kidney.setProtien(kidneyModel.getProtien());
+				kidney.setSerumCreatinine(kidneyModel.getSerumCreatinine());
+				kidney.setSugar(kidneyModel.getSugar());
+				kidney.setSuggestedKidneyMonitoring(kidneyModel.getSuggestedKidneyMonitoring());
+				kidney.setSuggestedInterventionForKidney(kidneyModel.getSuggestedInterventionForKidney() != null
+						? Arrays.asList(kidneyModel.getSuggestedInterventionForKidney().split(","))
+						: null);
+				episodeDto.setKidneyHealth(kidney);
+			}
+			if (episode.getEyeHealth() != null) {
+				EyeHealthDto eye = new EyeHealthDto();
+				EyeHealth eyeModel = episode.getEyeHealth();
+				eye.setCreatedDate(eyeModel.getCreatedDate());
+				eye.setCreateduser(eyeModel.getCreateduser());
+				eye.setId(eyeModel.getId());
+				eye.setLeftEyeNotes(eyeModel.getLeftEyeNotes());
+				eye.setRightEyeNotes(eyeModel.getRightEyeNotes());
+				eye.setSuggestedDilatedEyeExamination(eyeModel.getSuggestedDilatedEyeExamination() != null
+						? Arrays.asList(eyeModel.getSuggestedDilatedEyeExamination().split(","))
+						: null);
+				eye.setSuggestedInterventionForEye(eyeModel.getSuggestedInterventionForEye() != null
+						? Arrays.asList(eyeModel.getSuggestedInterventionForEye().split(","))
+						: null);
+				episodeDto.setEyeHealth(eye);
+			}
+			if (episode.getFeetHealth() != null) {
+				FeetHealthDto feet = new FeetHealthDto();
+				FeetHealth feetModel = episode.getFeetHealth();
+				feet.setCreatedDate(feetModel.getCreatedDate());
+				feet.setCreateduser(feetModel.getCreateduser());
+				feet.setId(feetModel.getId());
+				feet.setLeftFeetCondition(feetModel.getLeftFeetCondition());
+				feet.setRightFeetCondition(feetModel.getRightFeetCondition());
+				feet.setLeftFeetCounter(feetModel.getLeftFeetCounter());
+				feet.setRightFeetCounter(feetModel.getRightFeetCounter());
+				// observation
+				feet.setLeftFeetObservation(feetModel.getLeftFeetObservation() != null
+						? Arrays.asList(feetModel.getLeftFeetObservation().split(","))
+						: null);
+				feet.setRightFeetObservation(feetModel.getRightFeetObservation() != null
+						? Arrays.asList(feetModel.getRightFeetObservation().split(","))
+						: null);
 
-			// ulceration
-			feet.setRightFeetUlceration(feetModel.getRightFeetUlceration() != null
-					? Arrays.asList(feetModel.getRightFeetUlceration().split(","))
-					: null);
-			feet.setLeftFeetUlceration(feetModel.getLeftFeetUlceration() != null
-					? Arrays.asList(feetModel.getLeftFeetUlceration().split(","))
-					: null);
+				// ulceration
+				feet.setRightFeetUlceration(feetModel.getRightFeetUlceration() != null
+						? Arrays.asList(feetModel.getRightFeetUlceration().split(","))
+						: null);
+				feet.setLeftFeetUlceration(feetModel.getLeftFeetUlceration() != null
+						? Arrays.asList(feetModel.getLeftFeetUlceration().split(","))
+						: null);
 
-			// vibration
-			feet.setLeftFeetVibration(feetModel.getLeftFeetVibration() != null
-					? Arrays.asList(feetModel.getLeftFeetVibration().split(","))
-					: null);
-			feet.setRightFeetVibration(feetModel.getRightFeetVibration() != null
-					? Arrays.asList(feetModel.getRightFeetVibration().split(","))
-					: null);
+				// vibration
+				feet.setLeftFeetVibration(feetModel.getLeftFeetVibration() != null
+						? Arrays.asList(feetModel.getLeftFeetVibration().split(","))
+						: null);
+				feet.setRightFeetVibration(feetModel.getRightFeetVibration() != null
+						? Arrays.asList(feetModel.getRightFeetVibration().split(","))
+						: null);
 
-			episodeDto.setFeetHealth(feet);
+				episodeDto.setFeetHealth(feet);
+			}
+			if (episode.getNextAppointments() != null) {
+				NextAppointmentsDto app = new NextAppointmentsDto();
+				NextAppointments appModel = episode.getNextAppointments();
+				app.setId(appModel.getId());
+				app.setRetinalExaminastion(appModel.getRetinalExaminastion());
+				app.setBloodPressureDate(appModel.getBloodPressureDate());
+				app.setCholestrolMonitoring(appModel.getCholestrolMonitoring());
+				app.setCreatedDate(appModel.getCreatedDate());
+				app.setCreateduser(appModel.getCreateduser());
+				app.setHbA1cMonitoring(appModel.getHbA1cMonitoring());
+				app.setKidneyFunctions(appModel.getKidneyFunctions());
+				app.setNeuropathyScreening(appModel.getNeuropathyScreening());
+				app.setPlasmaMonitoring(appModel.getPlasmaMonitoring());
+				episodeDto.setNextAppointments(app);
+			}
+
+			return episodeDto;
 		}
-		if (episode.getNextAppointments() != null) {
-			NextAppointmentsDto app = new NextAppointmentsDto();
-			NextAppointments appModel = episode.getNextAppointments();
-			app.setId(appModel.getId());
-			app.setRetinalExaminastion(appModel.getRetinalExaminastion());
-			app.setBloodPressureDate(appModel.getBloodPressureDate());
-			app.setCholestrolMonitoring(appModel.getCholestrolMonitoring());
-			app.setCreatedDate(appModel.getCreatedDate());
-			app.setCreateduser(appModel.getCreateduser());
-			app.setHbA1cMonitoring(appModel.getHbA1cMonitoring());
-			app.setKidneyFunctions(appModel.getKidneyFunctions());
-			app.setNeuropathyScreening(appModel.getNeuropathyScreening());
-			app.setPlasmaMonitoring(appModel.getPlasmaMonitoring());
-			episodeDto.setNextAppointments(app);
-		}
-		return episodeDto;
+		return null;
 	}
 
 	@RequestMapping(value = "/saveemr", method = RequestMethod.POST)
@@ -402,15 +408,25 @@ public class DecodeEmrMasterController {
 		System.out.println("patient " + patient);
 		setPatientProperties(patient);
 		try {
-			EmrResponse response = emrMasterService.savePatient(patient);
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_PDF);
-			System.out.println("res in con " + response.getReport());
-			byte[] input = "manikanta".getBytes();
-			System.out.println("in b" + input);
-			String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
-			System.out.println("base64 " + encodeBase64String);
-			return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
+			if (patient.getEpisodes() != null) {
+				EmrResponse response = emrMasterService.savePatient(patient);
+				if (response.getReport() != null) {
+					HttpHeaders headers = new HttpHeaders();
+					headers.setContentType(MediaType.APPLICATION_PDF);
+					System.out.println("res in con " + response.getReport());
+					byte[] input = "manikanta".getBytes();
+					System.out.println("in b" + input);
+					String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
+					System.out.println("base64 " + encodeBase64String);
+					return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
+				} else {
+					return new ResponseEntity(null, HttpStatus.OK);
+				}
+			} else if (patient.getEpisodes() == null) {
+				System.out.println("yes only patient...");
+				emrDao.updatePatient(patient);
+				return new ResponseEntity(null, HttpStatus.CREATED);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -422,19 +438,21 @@ public class DecodeEmrMasterController {
 			patient.getPatientAddress().setPatient(patient);
 		}
 		setDates(patient);
-		patient.getEpisodes().parallelStream().forEach(ep -> {
-			ep.setPatient(patient);
-			ep.setStatus("Active");
-			setDiseaseHistory(ep);
-			setSeverity(ep);
-			setEyeHealth(ep);
-			setFamilyHistory(ep);
-			setHeartHealth(ep);
-			setFeetHealth(ep);
-			setKidneyHealth(ep);
-			setNextAppointments(ep);
+		if (patient.getEpisodes() != null) {
+			patient.getEpisodes().parallelStream().forEach(ep -> {
+				ep.setPatient(patient);
+				ep.setStatus("Active");
+				setDiseaseHistory(ep);
+				setSeverity(ep);
+				setEyeHealth(ep);
+				setFamilyHistory(ep);
+				setHeartHealth(ep);
+				setFeetHealth(ep);
+				setKidneyHealth(ep);
+				setNextAppointments(ep);
 
-		});
+			});
+		}
 	}
 
 	public void setDates(Patient patient) {

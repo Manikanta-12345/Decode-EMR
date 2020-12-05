@@ -63,7 +63,7 @@ public class Patient {
 	@OneToOne(mappedBy = "patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SELECT)
 	private Address patientAddress;
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id")
 	private Set<Episode> episodes;
 	

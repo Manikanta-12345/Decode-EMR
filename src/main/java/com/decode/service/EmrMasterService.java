@@ -47,4 +47,5 @@ public interface EmrMasterService {
 	public void updateGlobalCounter(GlobalSequenceCounters globalCounter);
 	public GlobalSequenceCounters getSequenceCounter(int orgId);
 	public GlobalSequenceCounters getEpisodeCounter(int orgId,int locId);
+	
 }

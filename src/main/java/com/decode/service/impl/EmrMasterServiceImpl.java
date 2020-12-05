@@ -225,12 +225,14 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	@Override
 	public EmrResponse savePatient(Patient patient) {
 		Patient patientFromDB = patientRepository.save(patient);
-		Map<Object, Object> reportParams = new HashMap<>();
-		reportParams.put("patientId", patientFromDB.getPatientId());
-		reportParams.put("episodeId", patientFromDB.getEpisodes().stream().findFirst().get().getEpisodeId());
-		byte[] report = decodeBirtService.generateReport(reportParams, BirtReportConstants.PDF_FORMAT);
 		EmrResponse response = new EmrResponse();
-		response.setReport(report);
+		if (patient.getEpisodes() != null) {
+			Map<Object, Object> reportParams = new HashMap<>();
+			reportParams.put("patientId", patientFromDB.getPatientId());
+			reportParams.put("episodeId", patientFromDB.getEpisodes().stream().findFirst().get().getEpisodeId());
+			byte[] report = decodeBirtService.generateReport(reportParams, BirtReportConstants.PDF_FORMAT);
+			response.setReport(report);
+		}
 		response.setMessage("Patient Created Successfully");
 		response.setStatusCode("Success");
 		System.out.println("before return " + response.getReport());
@@ -246,8 +248,9 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	public GlobalSequenceCounters getSequenceCounter(int orgId) {
 		return emrDao.getPatientSequenceCounter(orgId);
 	}
+
 	@Override
-	public GlobalSequenceCounters getEpisodeCounter(int orgId,int locId) {
-		return emrDao.getEpisodeSequenceCounter(orgId,locId);
+	public GlobalSequenceCounters getEpisodeCounter(int orgId, int locId) {
+		return emrDao.getEpisodeSequenceCounter(orgId, locId);
 	}
 }

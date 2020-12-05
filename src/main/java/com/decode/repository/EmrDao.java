@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.Hibernate;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -56,6 +57,7 @@ public class EmrDao {
 		return patient;
 	}
 
+	@Transactional
 	public Episode getEpisode(String episodeId) {
 
 		Session ses = sessionFactory.unwrap(Session.class);
@@ -72,5 +74,34 @@ public class EmrDao {
 			Hibernate.initialize(episode.getNextAppointments());
 		}
 		return episode;
+	}
+
+	@Transactional
+	public void updatePatient(Patient patient) {
+		Session ses = sessionFactory.unwrap(Session.class);
+		Query query = ses.createQuery(
+				"update Patient set firstName = :firstName , lastName = :lastName , dateOfBirth = :dateOfBirth , gender = :gender , mobile = :mobile , email = :email ,  title = :title ,countryId = :countryId,stateId = :stateId,districtId = :districtId,years = :years,months = :months,days = :days where patientId = :patientId");
+		query.setParameter("firstName", patient.getFirstName());
+		query.setParameter("lastName", patient.getLastName());
+		query.setParameter("dateOfBirth", patient.getDateOfBirth());
+		query.setParameter("gender", patient.getGender());
+		query.setParameter("mobile", patient.getMobile());
+		query.setParameter("email", patient.getEmail());
+		query.setParameter("title", patient.getTitle());
+		query.setParameter("countryId", patient.getCountryId());
+		query.setParameter("stateId", patient.getStateId());
+		query.setParameter("districtId", patient.getDistrictId());
+		query.setParameter("years", patient.getYears());
+		query.setParameter("months", patient.getMonths());
+		query.setParameter("days", patient.getDays());
+		query.setParameter("patientId", patient.getPatientId());
+
+		Query query1 = ses
+				.createQuery("update Address as a set a.address = :address,a.location= :location where a.patient.patientId = :patientId");
+		query1.setParameter("address", patient.getPatientAddress().getAddress());
+		query1.setParameter("location", patient.getPatientAddress().getLocation());
+		query1.setParameter("patientId", patient.getPatientId());
+		int result = query.executeUpdate();
+		int result1 = query1.executeUpdate();
 	}
 }
