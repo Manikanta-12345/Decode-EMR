@@ -80,7 +80,7 @@ public class EmrDao {
 	public void updatePatient(Patient patient) {
 		Session ses = sessionFactory.unwrap(Session.class);
 		Query query = ses.createQuery(
-				"update Patient set firstName = :firstName , lastName = :lastName , dateOfBirth = :dateOfBirth , gender = :gender , mobile = :mobile , email = :email ,  title = :title ,countryId = :countryId,stateId = :stateId,districtId = :districtId,years = :years,months = :months,days = :days where patientId = :patientId");
+				"update Patient set firstName = :firstName , lastName = :lastName , dateOfBirth = :dateOfBirth , gender = :gender , mobile = :mobile , email = :email ,  title = :title ,countryId = :countryId,stateId = :stateId,districtId = :districtId,years = :years,months = :months,days = :days ,nextKin = :nextKin,contact = :contact where patientId = :patientId");
 		query.setParameter("firstName", patient.getFirstName());
 		query.setParameter("lastName", patient.getLastName());
 		query.setParameter("dateOfBirth", patient.getDateOfBirth());
@@ -95,6 +95,9 @@ public class EmrDao {
 		query.setParameter("months", patient.getMonths());
 		query.setParameter("days", patient.getDays());
 		query.setParameter("patientId", patient.getPatientId());
+		
+		query.setParameter("nextKin", patient.getNextKin());
+		query.setParameter("contact", patient.getContact());
 
 		Query query1 = ses
 				.createQuery("update Address as a set a.address = :address,a.location= :location where a.patient.patientId = :patientId");

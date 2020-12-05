@@ -1,6 +1,7 @@
 package com.decode.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "feet_health")
 public class FeetHealth {
@@ -38,6 +41,8 @@ public class FeetHealth {
 	private String rightFeetCounter;
 	@Column(name = "left_feet_counter")
 	private String leftFeetCounter;
+	@Column(name = "feet_notes")
+	private String feetNotes;
 	@Column(name = "created_user")
 	private String createduser;
 	@Column(name = "created_date")
@@ -46,6 +51,23 @@ public class FeetHealth {
 	private Date lastUpdateDate;
 	@Column(name = "last_update_user")
 	private String lastUpdatedUser;
+	public String getLeftFeetSelected() {
+		return leftFeetSelected;
+	}
+	public void setLeftFeetSelected(String leftFeetSelected) {
+		this.leftFeetSelected = leftFeetSelected;
+	}
+	public String getRightFeetSelected() {
+		return rightFeetSelected;
+	}
+	public void setRightFeetSelected(String rightFeetSelected) {
+		this.rightFeetSelected = rightFeetSelected;
+	}
+
+	@Column(name = "left_feet_selected")
+	private String  leftFeetSelected;
+	@Column(name = "right_feet_selected")
+	private String  rightFeetSelected;
 	@OneToOne
 	@JoinColumn(name = "episode_id")
     private Episode episode;
@@ -114,6 +136,12 @@ public class FeetHealth {
 	}
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	public String getFeetNotes() {
+		return feetNotes;
+	}
+	public void setFeetNotes(String feetNotes) {
+		this.feetNotes = feetNotes;
 	}
 	public String getRightFeetVibration() {
 		return rightFeetVibration;

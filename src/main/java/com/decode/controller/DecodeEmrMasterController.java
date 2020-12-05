@@ -350,6 +350,13 @@ public class DecodeEmrMasterController {
 				feet.setRightFeetCondition(feetModel.getRightFeetCondition());
 				feet.setLeftFeetCounter(feetModel.getLeftFeetCounter());
 				feet.setRightFeetCounter(feetModel.getRightFeetCounter());
+				feet.setFeetNotes(feetModel.getFeetNotes());
+				feet.setLeftFeetSelected(feetModel.getLeftFeetSelected() != null
+						? Arrays.asList(feetModel.getLeftFeetSelected().split(","))
+						: null);
+				feet.setRightFeetSelected(feetModel.getRightFeetSelected() != null
+						? Arrays.asList(feetModel.getRightFeetSelected().split(","))
+						: null);
 				// observation
 				feet.setLeftFeetObservation(feetModel.getLeftFeetObservation() != null
 						? Arrays.asList(feetModel.getLeftFeetObservation().split(","))
@@ -408,23 +415,29 @@ public class DecodeEmrMasterController {
 		System.out.println("patient " + patient);
 		setPatientProperties(patient);
 		try {
-			if (patient.getEpisodes() != null) {
-				EmrResponse response = emrMasterService.savePatient(patient);
-				if (response.getReport() != null) {
-					HttpHeaders headers = new HttpHeaders();
-					headers.setContentType(MediaType.APPLICATION_PDF);
-					System.out.println("res in con " + response.getReport());
-					byte[] input = "manikanta".getBytes();
-					System.out.println("in b" + input);
-					String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
-					System.out.println("base64 " + encodeBase64String);
-					return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
-				} else {
-					return new ResponseEntity(null, HttpStatus.OK);
+			if (patient.getPatientId() != null) {
+				if (patient.getEpisodes() != null) {
+					EmrResponse response = emrMasterService.savePatient(patient);
+					if (response.getReport() != null) {
+						HttpHeaders headers = new HttpHeaders();
+						headers.setContentType(MediaType.APPLICATION_PDF);
+						System.out.println("res in con " + response.getReport());
+						byte[] input = "manikanta".getBytes();
+						System.out.println("in b" + input);
+						String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
+						System.out.println("base64 " + encodeBase64String);
+						return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
+					} else {
+						return new ResponseEntity(null, HttpStatus.OK);
+					}
+				} else if (patient.getEpisodes() == null) {
+					System.out.println("yes only patient..." + patient.getPatientId());
+					emrDao.updatePatient(patient);
+					return new ResponseEntity(null, HttpStatus.CREATED);
 				}
-			} else if (patient.getEpisodes() == null) {
-				System.out.println("yes only patient...");
-				emrDao.updatePatient(patient);
+			} else {
+				System.out.println("yes only patient save..." + patient.getPatientId());
+				EmrResponse response = emrMasterService.savePatient(patient);
 				return new ResponseEntity(null, HttpStatus.CREATED);
 			}
 		} catch (Exception e) {
@@ -547,6 +560,20 @@ public class DecodeEmrMasterController {
 						.trim();
 				String result = trim.replaceAll("(\\s*,\\s*)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", ",");
 				ep.getFeetHealth().setRightFeetObservation(result);
+			}
+			if (ep.getFeetHealth().getLeftFeetSelected() != null) {
+
+				String trim = ep.getFeetHealth().getLeftFeetSelected().replaceAll("\\[", "").replaceAll("\\]", "")
+						.trim();
+				String result = trim.replaceAll("(\\s*,\\s*)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", ",");
+				ep.getFeetHealth().setLeftFeetSelected(result);
+			}
+			if (ep.getFeetHealth().getRightFeetSelected() != null) {
+
+				String trim = ep.getFeetHealth().getRightFeetSelected().replaceAll("\\[", "").replaceAll("\\]", "")
+						.trim();
+				String result = trim.replaceAll("(\\s*,\\s*)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", ",");
+				ep.getFeetHealth().setRightFeetSelected(result);
 			}
 			if (ep.getFeetHealth().getLeftFeetObservation() != null) {
 

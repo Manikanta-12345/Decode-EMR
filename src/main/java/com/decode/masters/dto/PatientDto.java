@@ -26,7 +26,7 @@ public class PatientDto {
 	private String mobile;
 	private String nextKin;
 	private String createduser;
-	
+	private String contact;
 	private AddressDto patientAddress;
 	
 	private List<EpisodeDto> episodes;
@@ -133,6 +133,14 @@ public class PatientDto {
 
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 	public int getDistrictId() {

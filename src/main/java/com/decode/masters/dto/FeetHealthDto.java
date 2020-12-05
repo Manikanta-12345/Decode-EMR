@@ -22,8 +22,13 @@ public class FeetHealthDto {
 	private List<String>  rightFeetVibration;
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private List<String>  leftFeetVibration;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+	private List<String>  leftFeetSelected;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+	private List<String>  rightFeetSelected;
 	private String rightFeetCounter;
 	private String leftFeetCounter;
+	private String feetNotes;
 	private String createduser;
 	private Date createdDate;
 	private Date lastUpdateDate;
@@ -102,6 +107,24 @@ public class FeetHealthDto {
 	}
 	public Date getCreatedDate() {
 		return createdDate;
+	}
+	public List<String> getLeftFeetSelected() {
+		return leftFeetSelected;
+	}
+	public String getFeetNotes() {
+		return feetNotes;
+	}
+	public void setFeetNotes(String feetNotes) {
+		this.feetNotes = feetNotes;
+	}
+	public void setLeftFeetSelected(List<String> leftFeetSelected) {
+		this.leftFeetSelected = leftFeetSelected;
+	}
+	public List<String> getRightFeetSelected() {
+		return rightFeetSelected;
+	}
+	public void setRightFeetSelected(List<String> rightFeetSelected) {
+		this.rightFeetSelected = rightFeetSelected;
 	}
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;

@@ -54,6 +54,8 @@ public class Patient {
 	private String nextKin;
 	@Column(name = "created_user")
 	private String createduser;
+	@Column(name = "contact")
+	private String contact;
 	@Column(name = "created_date")
 	private Date createdDate;
 	@Column(name = "last_update_date")
@@ -169,6 +171,14 @@ public class Patient {
 	public int getDistrictId() {
 		return districtId;
 	}
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
 	public int getOrgId() {
 		return orgId;
 	}
