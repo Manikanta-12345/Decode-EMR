@@ -26,14 +26,18 @@ public class Episode {
 	@Column(name = "episode_id")
 	private String episodeId;
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "patient_id")
+	@JoinColumn(name = "patient_id",updatable = false)
 	private Patient patient;
-	@Column(name = "created_user")
+	@Column(name = "created_user",updatable = false)
 	private String createdUser;
 	@Column(name = "last_updated_user")
 	private String lastUpdatedUser;
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
 	private Date createdDate;
+	@Column(name = "left_file_name")
+	private String leftFileName;
+	@Column(name = "right_file_name")
+	private String rightFileName;
 	@Column(name = "last_updated_date")
 	private Date lastUpdateDate;
 	@OneToOne(mappedBy = "episode", cascade = CascadeType.ALL)
@@ -125,6 +129,24 @@ public class Episode {
 
 	public DiseaseSeverityAndControlStatus getDiseaseSeverity() {
 		return diseaseSeverity;
+	}
+
+	
+
+	public String getLeftFileName() {
+		return leftFileName;
+	}
+
+	public void setLeftFileName(String leftFileName) {
+		this.leftFileName = leftFileName;
+	}
+
+	public String getRightFileName() {
+		return rightFileName;
+	}
+
+	public void setRightFileName(String rightFileName) {
+		this.rightFileName = rightFileName;
 	}
 
 	public void setDiseaseSeverity(DiseaseSeverityAndControlStatus diseaseSeverity) {

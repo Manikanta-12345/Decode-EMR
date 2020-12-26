@@ -10,6 +10,7 @@ import com.decode.masters.dto.EmrResponse;
 import com.decode.masters.dto.FeetObservationMastersDTO;
 import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
+import com.decode.masters.dto.LocationsDTO;
 import com.decode.masters.dto.MedicationMastersDTO;
 import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
@@ -39,7 +40,7 @@ public interface EmrMasterService {
 	public List<SuggestedDilatedEyeExaminationDTO> getSuggestedDilatedEyeExamination();
 
 	public List<SuggestedEyeInterventionDTO> getSuggestedEyeIntervention();
-
+	public List<LocationsDTO> getLocations();
 	public List<SuggestedHeartInterventionDTO> getSuggestedHeartIntervention();
 
 	public List<SuggestedKidneyInterventionDTO> getSuggestedKidneyIntervention();

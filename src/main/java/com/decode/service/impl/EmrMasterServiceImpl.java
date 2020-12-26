@@ -16,6 +16,7 @@ import com.decode.masters.dto.EmrResponse;
 import com.decode.masters.dto.FeetObservationMastersDTO;
 import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
+import com.decode.masters.dto.LocationsDTO;
 import com.decode.masters.dto.MedicationMastersDTO;
 import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
@@ -32,6 +33,7 @@ import com.decode.repository.FeetObservationMastersRepository;
 import com.decode.repository.GlobalSequenceRepository;
 import com.decode.repository.HabitualPatternMastersRepository;
 import com.decode.repository.LifeStyleMedicationRespository;
+import com.decode.repository.LocationsRepository;
 import com.decode.repository.MedicationMastersRepository;
 import com.decode.repository.PatientRepository;
 import com.decode.repository.SuggestedDilatedEyeExaminationRepository;
@@ -77,7 +79,8 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 	private DecodeBirtService decodeBirtService;
 	@Autowired
 	private EmrDao emrDao;
-
+	@Autowired
+	private LocationsRepository locationRepository;
 	@Override
 	public List<DiabetesMastersDTO> getDiabetesMasters() {
 		List<DiabetesMastersDTO> diabetesMastersList = new ArrayList<>();
@@ -209,7 +212,17 @@ public class EmrMasterServiceImpl implements EmrMasterService {
 		});
 		return suggestedHeartInterventionList;
 	}
-
+	@Override
+	public List<LocationsDTO> getLocations() {
+		List<LocationsDTO> locations = new ArrayList<>();
+		locationRepository.findAll().parallelStream().forEach(master -> {
+			LocationsDTO location = new LocationsDTO();
+			location.setId(master.getId());
+			location.setName(master.getName());
+			locations.add(location);
+		});
+		return locations;
+	}
 	@Override
 	public List<SuggestedKidneyInterventionDTO> getSuggestedKidneyIntervention() {
 		List<SuggestedKidneyInterventionDTO> suggestedKidneyInterventionList = new ArrayList<>();

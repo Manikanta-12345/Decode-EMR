@@ -52,11 +52,11 @@ public class Patient {
 	private String mobile;
 	@Column(name = "next_kin")
 	private String nextKin;
-	@Column(name = "created_user")
+	@Column(name = "created_user",updatable = false)
 	private String createduser;
 	@Column(name = "contact")
 	private String contact;
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
 	private Date createdDate;
 	@Column(name = "last_update_date")
 	private Date lastUpdateDate;

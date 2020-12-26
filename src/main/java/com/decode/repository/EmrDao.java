@@ -80,7 +80,7 @@ public class EmrDao {
 	public void updatePatient(Patient patient) {
 		Session ses = sessionFactory.unwrap(Session.class);
 		Query query = ses.createQuery(
-				"update Patient set firstName = :firstName , lastName = :lastName , dateOfBirth = :dateOfBirth , gender = :gender , mobile = :mobile , email = :email ,  title = :title ,countryId = :countryId,stateId = :stateId,districtId = :districtId,years = :years,months = :months,days = :days ,nextKin = :nextKin,contact = :contact where patientId = :patientId");
+				"update Patient set firstName = :firstName , lastName = :lastName , dateOfBirth = :dateOfBirth,lastUpdatedUser= :lastUpdatedUser,lastUpdateDate = :lastUpdatedDate , gender = :gender , mobile = :mobile , email = :email ,  title = :title ,countryId = :countryId,stateId = :stateId,districtId = :districtId,years = :years,months = :months,days = :days ,nextKin = :nextKin,contact = :contact where patientId = :patientId");
 		query.setParameter("firstName", patient.getFirstName());
 		query.setParameter("lastName", patient.getLastName());
 		query.setParameter("dateOfBirth", patient.getDateOfBirth());
@@ -98,7 +98,8 @@ public class EmrDao {
 		
 		query.setParameter("nextKin", patient.getNextKin());
 		query.setParameter("contact", patient.getContact());
-
+		query.setParameter("lastUpdatedUser", patient.getLastUpdatedUser());
+		query.setParameter("lastUpdatedDate", patient.getLastUpdateDate());
 		Query query1 = ses
 				.createQuery("update Address as a set a.address = :address,a.location= :location where a.patient.patientId = :patientId");
 		query1.setParameter("address", patient.getPatientAddress().getAddress());
@@ -106,5 +107,13 @@ public class EmrDao {
 		query1.setParameter("patientId", patient.getPatientId());
 		int result = query.executeUpdate();
 		int result1 = query1.executeUpdate();
+	}
+	@Transactional
+	public void inactiveEpisodes() {
+		Session ses = sessionFactory.unwrap(Session.class);
+		Query query = ses.createQuery(
+				"update Episode set status = :status");
+		query.setParameter("status", "InActive");
+		int result1 = query.executeUpdate();
 	}
 }

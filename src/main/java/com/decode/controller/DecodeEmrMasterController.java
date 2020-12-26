@@ -1,18 +1,23 @@
 package com.decode.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.apache.fop.image.EPSImage;
 import org.modelmapper.Conditions;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.convention.NamingConventions;
@@ -21,13 +26,26 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.decode.masters.dto.CombrobiditiesMastersDTO;
 import com.decode.masters.dto.CountryDto;
 import com.decode.masters.dto.DiabetecTypesDTO;
@@ -46,10 +64,12 @@ import com.decode.masters.dto.HabitualPatternMastersDTO;
 import com.decode.masters.dto.HeartHealthDto;
 import com.decode.masters.dto.KidneyHealthDto;
 import com.decode.masters.dto.LifeStyleMedicationMastersDTO;
+import com.decode.masters.dto.LocationsDTO;
 import com.decode.masters.dto.MedicationMastersDTO;
 import com.decode.masters.dto.NextAppointmentsDto;
 import com.decode.masters.dto.PatientDto;
 import com.decode.masters.dto.PatientSearchDto;
+import com.decode.masters.dto.ReportDTO;
 import com.decode.masters.dto.StateDto;
 import com.decode.masters.dto.SuggestedDilatedEyeExaminationDTO;
 import com.decode.masters.dto.SuggestedEyeInterventionDTO;
@@ -67,10 +87,13 @@ import com.decode.repository.EmrDao;
 import com.decode.repository.EpisodeRepository;
 import com.decode.repository.PatientRepository;
 import com.decode.repository.StateRepository;
+import com.decode.service.DecodeBirtService;
 import com.decode.service.EmrMasterService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/masters")
+@EnableScheduling
 public class DecodeEmrMasterController {
 
 	@Autowired
@@ -135,6 +158,12 @@ public class DecodeEmrMasterController {
 		List<DiseaseInterventionMastersDTO> diseaseInterventionMastersList = emrMasterService
 				.getDiseaseInterventionMasters();
 		return new ResponseEntity<List<DiseaseInterventionMastersDTO>>(diseaseInterventionMastersList, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getlocations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<LocationsDTO>> getLocations() {
+		List<LocationsDTO> locations = emrMasterService.getLocations();
+		return new ResponseEntity<List<LocationsDTO>>(locations, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getsuggesteddilatedeyeexamination", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -236,6 +265,8 @@ public class DecodeEmrMasterController {
 			episodeDto.setEpisodeId(episode.getEpisodeId());
 			episodeDto.setOrgId(episode.getOrgId());
 			episodeDto.setLocationId(episode.getLocationId());
+			episodeDto.setLeftFileName(episode.getLeftFileName());
+			episodeDto.setRightFileName(episode.getRightFileName());
 			if (episode.getDiseaseHistory() != null) {
 				DiseaseHistoryDto history = new DiseaseHistoryDto();
 				history.setComorBidities(episode.getDiseaseHistory().getComorBidities() != null
@@ -404,16 +435,21 @@ public class DecodeEmrMasterController {
 		return null;
 	}
 
-	@RequestMapping(value = "/saveemr", method = RequestMethod.POST)
-	public ResponseEntity<byte[]> saveeEmr(@RequestBody PatientDto patientDTO) {
-		System.out.println("org " + patientDTO.getOrgId());
+	@PostMapping(value = "/saveemr/{user}")
+	public ResponseEntity<byte[]> saveeEmr(@PathVariable("user") String user, @RequestPart("patient") String patientDTO,
+			@RequestPart(value = "leftfile", required = false) MultipartFile leftfile,
+			@RequestPart(value = "rightfile", required = false) MultipartFile rightfile) throws Exception {
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setFieldMatchingEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT)
 				.setFieldAccessLevel(AccessLevel.PRIVATE).setPropertyCondition(Conditions.isNotNull())
 				.setAmbiguityIgnored(true).setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
-		Patient patient = mapper.map(patientDTO, Patient.class);
+		// Patient patient = mapper.map(patientDTO, Patient.class);
+		PatientDto patientdt = new ObjectMapper().readValue(patientDTO, PatientDto.class);
+		Patient patient = mapper.map(patientdt, Patient.class);
 		System.out.println("patient " + patient);
-		setPatientProperties(patient);
+
+		setPatientProperties(patient, user, leftfile != null ? leftfile.getOriginalFilename() : null,
+				rightfile != null ? rightfile.getOriginalFilename() : null);
 		try {
 			if (patient.getPatientId() != null) {
 				if (patient.getEpisodes() != null) {
@@ -426,35 +462,199 @@ public class DecodeEmrMasterController {
 						System.out.println("in b" + input);
 						String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
 						System.out.println("base64 " + encodeBase64String);
+						uploadToS3Bucket(patient, leftfile, rightfile);
 						return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
 					} else {
 						return new ResponseEntity(null, HttpStatus.OK);
 					}
+
 				} else if (patient.getEpisodes() == null) {
 					System.out.println("yes only patient..." + patient.getPatientId());
+					setDates(patient, user);
 					emrDao.updatePatient(patient);
 					return new ResponseEntity(null, HttpStatus.CREATED);
 				}
 			} else {
 				System.out.println("yes only patient save..." + patient.getPatientId());
+				setDates(patient, user);
 				EmrResponse response = emrMasterService.savePatient(patient);
-				return new ResponseEntity(null, HttpStatus.CREATED);
+				if (response.getReport() != null) {
+					HttpHeaders headers = new HttpHeaders();
+					headers.setContentType(MediaType.APPLICATION_PDF);
+					System.out.println("res in con " + response.getReport());
+					byte[] input = "manikanta".getBytes();
+					System.out.println("in b" + input);
+					String encodeBase64String = Base64.getEncoder().encodeToString(response.getReport());
+					System.out.println("base64 " + encodeBase64String);
+					uploadToS3Bucket(patient, leftfile, rightfile);
+					return new ResponseEntity<byte[]>(response.getReport(), HttpStatus.OK);
+				} else {
+					return new ResponseEntity(null, HttpStatus.CREATED);
+				}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
-	private void setPatientProperties(Patient patient) {
+	@RequestMapping(value = "/getFile", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> downloadFiles(@RequestParam("patientId") String patientId,
+			@RequestParam("episodeId") String episodeId, @RequestParam("currentEye") String currentEye,
+			@RequestParam("fileName") String fileName) throws Exception {
+		BasicAWSCredentials creds = new BasicAWSCredentials("AKIAVSJSPPJPABQSEDFW",
+				"+snXV+LTbl9EEaRmWSBVmeQzCXevf6OHbmMo+QCu");
+		AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds))
+				.withRegion(Regions.AP_SOUTH_1).build();
+
+		GetObjectRequest req = new GetObjectRequest("decode-patients-images",
+				patientId + "/" + episodeId + "/" + currentEye + "/" + fileName);
+		S3Object object = s3Client.getObject(req);
+		InputStream is = object.getObjectContent();
+		byte[] bytes = getBytesFromInputStream(is);
+		HttpHeaders respHeaders = new HttpHeaders();
+		respHeaders.setContentLength(bytes.length);
+		respHeaders.setContentType(new MediaType("text", "json"));
+		respHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+		respHeaders.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
+		return new ResponseEntity<byte[]>(bytes, respHeaders, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getReports", method = RequestMethod.GET)
+	public ResponseEntity<List<ReportDTO>> getReportsData(
+			@RequestParam(value = "patientId", required = false) String patientId,
+			@RequestParam(value = "from", required = false) String fromDate,
+			@RequestParam(value = "to", required = false) String toDate) throws Exception {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date frmDate = null;
+		Date tDate = null;
+		List<ReportDTO> reports=null;
+		if (!fromDate.equals("null")) {
+			frmDate = getStartTime(format.parse(fromDate)).getTime();
+		}
+		if (!toDate.equals("null")) {
+			tDate = getEndTime(format.parse(toDate)).getTime();
+		}
+		System.out.println("from date " + frmDate);
+		System.out.println("to date " + tDate);
+		if(patientId.equals("null")) {
+		 reports = episodeRepository.getRepors(frmDate, tDate);
+		}else if(patientId!=null) {
+			 reports = episodeRepository.getReporsOfPatient(frmDate, tDate,patientId);
+		}
+		return new ResponseEntity<List<ReportDTO>>(reports, HttpStatus.OK);
+	}
+	@Autowired
+	public DecodeBirtService decodeBirtService;
+
+	@RequestMapping(value = "/getReport", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getBirtReport(@RequestParam("patientId") String patientId, @RequestParam("episodeId") String episodeId
+		) {
+		Map<Object, Object> reportParams = new HashMap<Object, Object>();
+		reportParams.put("patientId", patientId);
+		reportParams.put("episodeId", episodeId);
+
+		byte[] generateReport = decodeBirtService.generateReport(reportParams, "pdf");
+		return new ResponseEntity<byte[]>(generateReport, HttpStatus.OK);
+	}
+	public Calendar getEndTime(Date toDate) {
+		if (toDate != null) {
+			Calendar endDate = Calendar.getInstance();
+			endDate.setTime(toDate);
+
+			endDate.set(Calendar.HOUR_OF_DAY, 23);
+			endDate.set(Calendar.MINUTE, 59);
+			endDate.set(Calendar.SECOND, 59);
+			endDate.set(Calendar.MILLISECOND, 999);
+
+			return endDate;
+		} else {
+			return null;
+		}
+
+	}
+
+	public Calendar getStartTime(Date fromDate) {
+		if (fromDate != null) {
+			Calendar startDate = Calendar.getInstance();
+			startDate.setTime(fromDate);
+			startDate.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DATE), 0,
+					0, 0);
+			return startDate;
+		} else {
+			return null;
+		}
+
+	}
+
+	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		byte[] buffer = new byte[0xFFFF];
+		for (int len = is.read(buffer); len != -1; len = is.read(buffer)) {
+			os.write(buffer, 0, len);
+		}
+		return os.toByteArray();
+	}
+
+	public void uploadToS3Bucket(Patient patient, MultipartFile leftFile, MultipartFile rightFile) throws Exception {
+		BasicAWSCredentials creds = new BasicAWSCredentials("AKIAVSJSPPJPABQSEDFW",
+				"+snXV+LTbl9EEaRmWSBVmeQzCXevf6OHbmMo+QCu");
+		AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds))
+				.withRegion(Regions.AP_SOUTH_1).build();
+		File leftEyeImage = convertMultipartFileToFile(leftFile);
+		File rightEyeImage = convertMultipartFileToFile(rightFile);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		String todayDate = formatter.format(new Date());
+		if (leftFile != null && leftEyeImage != null) {
+			s3Client.deleteObject("decode-patients-images", patient.getPatientId() + "/"
+					+ patient.getEpisodes().stream().findFirst().get().getEpisodeId() + "/");
+			PutObjectRequest leftPutObjectRequest = new PutObjectRequest("decode-patients-images",
+					patient.getPatientId() + "/" + patient.getEpisodes().stream().findFirst().get().getEpisodeId() + "/"
+							+ "Left_Eye/" + leftEyeImage.getName(),
+					leftEyeImage);
+			s3Client.putObject(leftPutObjectRequest);
+		}
+		if (rightFile != null && rightEyeImage != null) {
+			s3Client.deleteObject("decode-patients-images", patient.getPatientId() + "/"
+					+ patient.getEpisodes().stream().findFirst().get().getEpisodeId() + "/");
+			PutObjectRequest rightPutObjectRequest = new PutObjectRequest("decode-patients-images",
+					patient.getPatientId() + "/" + patient.getEpisodes().stream().findFirst().get().getEpisodeId() + "/"
+							+ "Right_Eye/" + rightEyeImage.getName(),
+					rightEyeImage);
+			s3Client.putObject(rightPutObjectRequest);
+		}
+
+	}
+
+	private File convertMultipartFileToFile(MultipartFile file) throws IOException {
+		File convertedFile = null;
+		if (file != null) {
+			convertedFile = new File(file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(convertedFile);
+			fos.write(file.getBytes());
+			fos.close();
+
+		}
+		return convertedFile;
+	}
+
+	private void setPatientProperties(Patient patient, String user, String leftName, String rightName) {
 		if (patient.getPatientAddress() != null) {
 			patient.getPatientAddress().setPatient(patient);
 		}
-		setDates(patient);
+		setDates(patient, user);
 		if (patient.getEpisodes() != null) {
 			patient.getEpisodes().parallelStream().forEach(ep -> {
 				ep.setPatient(patient);
 				ep.setStatus("Active");
+				if (leftName != null) {
+					ep.setLeftFileName(leftName);
+				}
+				if (rightName != null) {
+					ep.setRightFileName(rightName);
+				}
 				setDiseaseHistory(ep);
 				setSeverity(ep);
 				setEyeHealth(ep);
@@ -468,24 +668,24 @@ public class DecodeEmrMasterController {
 		}
 	}
 
-	public void setDates(Patient patient) {
+	public void setDates(Patient patient, String user) {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		System.out.println("logged user " + name);
 		if (patient.getPatientId() == null) {
 			patient.setCreatedDate(new Date());
-			patient.setCreateduser(name);
+			patient.setCreateduser(user);
 		} else {
 			patient.setLastUpdateDate(new Date());
-			patient.setLastUpdatedUser(name);
+			patient.setLastUpdatedUser(user);
 		}
 		if (patient.getEpisodes() != null) {
 			patient.getEpisodes().parallelStream().forEach(ep -> {
 				if (ep.getEpisodeId() == null) {
 					ep.setCreatedDate(new Date());
-					ep.setCreatedUser(name);
+					ep.setCreatedUser(user);
 				} else {
 					ep.setLastUpdateDate(new Date());
-					ep.setLastUpdatedUser(name);
+					ep.setLastUpdatedUser(user);
 				}
 			});
 		}
@@ -629,4 +829,8 @@ public class DecodeEmrMasterController {
 		}
 	}
 
+	@Scheduled(cron = "0 0 0 * * ?")
+	public void run() {
+		emrDao.inactiveEpisodes();
+	}
 }

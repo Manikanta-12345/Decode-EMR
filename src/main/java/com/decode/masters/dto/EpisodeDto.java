@@ -2,6 +2,8 @@ package com.decode.masters.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 public class EpisodeDto {
@@ -29,10 +31,11 @@ public class EpisodeDto {
 	private HeartHealthDto heartHealth;
 
 	private FamilyHistoryDto familyHistory;
-
 	private FeetHealthDto feetHealth;
 	private int orgId;
     private int locationId;
+    private String leftFileName;
+    private String rightFileName;
 	public int getLocationId() {
 		return locationId;
 	}
@@ -148,6 +151,24 @@ public class EpisodeDto {
 	}
 
 	private NextAppointmentsDto nextAppointments;
+	
+
+	public String getLeftFileName() {
+		return leftFileName;
+	}
+
+	public void setLeftFileName(String leftFileName) {
+		this.leftFileName = leftFileName;
+	}
+
+	public String getRightFileName() {
+		return rightFileName;
+	}
+
+	public void setRightFileName(String rightFileName) {
+		this.rightFileName = rightFileName;
+	}
+
 	public int getOrgId() {
 		return orgId;
 	}
